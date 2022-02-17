@@ -32,7 +32,7 @@ ex) 이름.md
 ```
 
 ### 2. AWS SAA C02 샘플 문항
-[AWS SAA C02 샘플 문항](https://d1.awsstatic.com/ko_KR/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf)을 풀어보고 자신만의 풀이와 해설을 작성합니다.
+[AWS SAA C02 샘플 문항](https://d1.awsstatic.com/ko_KR/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Sample-Questions.pdf)을 풀어보고 자신만의 풀이와 해설을 작성합니다.
 
 ### 3. (Optional) AWS SAA C01 샘플 문항
 [AWS SAA C01 샘플 문항](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)을 풀이하고 자신만의 풀이와 해설을 작성합니다. (지난 C01 유형이므로 선택적으로 하셔도 됩니다.)
