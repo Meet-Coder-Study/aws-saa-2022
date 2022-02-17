@@ -171,10 +171,134 @@ S3 시리즈 서비스에 대한 종류를 이해하지 못하고 있었음
 스팟 인스턴스가 저렴하다고 들었으나 정확한 특징에 대해서는 이해하지 못하고 있었음
 ```
 
-### 3. (Optional) AWS SAA C01 샘플 문항
-[AWS SAA C01 샘플 문항](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)을 풀이하고 자신만의 풀이와 해설을 작성합니다.
+## 3. (Optional) AWS SAA C01 샘플 문항
+[AWS SAA C01 샘플 문항](https://d1.awsstatic.com/training-and-certification/docs/AWS_Certified_Solutions_Architect_Associate_Sample_Questions.pdf)
 
-### 4. 강의 콘텐츠 선정
+1. A company is storing an access key (access key ID and secret access key) in a text file on a custom AMI. The company uses the access key to access DynamoDB tables from instances created from the AMI. The security team has mandated a more secure solution. Which solution will meet the security team’s mandate?
+```
+A. Put the access key in an S3 bucket, and retrieve the access key on boot from the instance.
+B. Pass the access key to the instances through instance user data.
+C. Obtain the access key from a key server launched in a private subnet.
+D. Create an IAM role with permissions to access the table, and launch all instances with the new role.
+```
+```
+선택 D, 정답 D
+IAM role으로 테이블 접근 권한을 관리하는 것이 가장 정교하고 안전한 방법으로 보임
+```
+
+2. A company is developing a highly available web application using stateless web servers. Which services are suitable for storing session state data? (Select TWO.)
+```
+A. CloudWatch
+B. DynamoDB
+C. Elastic Load Balancing
+D. ElastiCache
+E. Storage Gateway
+```
+```
+선택 BD, 정답 BD
+데이터베이스/스토리지의 성격을 갖는 것은 B, D
+```
+
+3. Company salespeople upload their sales figures daily. A Solutions Architect needs a durable storage solution for these documents that also protects against users accidentally deleting important documents. Which action will protect against unintended user actions?
+```
+A. Store data in an EBS volume and create snapshots once a week.
+B. Store data in an S3 bucket and enable versioning.
+C. Store data in two S3 buckets in different AWS regions.
+D. Store data on EC2 instance storage.
+```
+```
+선택 B, 정답 B
+데이터 유실을 대비할 수 있는 방법 중 하나는 S3로 버전관리하는 것   
+```
+
+4. An application requires a highly available relational database with an initial storage capacity of 8 TB. The database will grow by 8 GB every day. To support expected traffic, at least eight read replicas will be required to handle database reads.
+   Which option will meet these requirements?
+```
+A. DynamoDB
+B. Amazon S3
+C. Amazon Aurora
+D. Amazon Redshift
+```
+```
+선택 A, 정답 C
+DynamoDB는 NoSQL이고 Aurora가 RDBMS임.
+AWS 데이터베이스의 차이에 대해서 공부해야 겠음.
+```
+
+5. A Solutions Architect is designing a critical business application with a relational database that runs on an EC2 instance. It requires a single EBS volume that can support up to 16,000 IOPS. Which Amazon EBS volume type can meet the performance requirements of this application?
+```
+A. EBS Provisioned IOPS SSD
+B. EBS Throughput Optimized HDD
+C. EBS General Purpose SSD
+D. EBS Cold HDD
+```
+```
+선택 A, 정답 A
+일단 높은 IOPS가 필요하다는 점에서 SSD 선택. 범용(General Purposed) 보다는 Provisioned IOPS가 더 성능이 좋을 것으로 보여서 선택,
+https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ebs-volume-types.html
+```
+
+6. A web application allows customers to upload orders to an S3 bucket. The resulting Amazon S3 events trigger a Lambda function that inserts a message to an SQS queue. A single EC2 instance reads messages from the queue, processes them, and stores them in an DynamoDB table partitioned by unique order ID. Next month traffic is expected to increase by a factor of 10 and a Solutions Architect is reviewing the architecture for possible scaling problems. Which component is MOST likely to need re-architecting to be able to scale to accommodate the new traffic?
+```
+A. Lambda function
+B. SQS queue
+C. EC2 instance
+D. DynamoDB table
+```
+```
+선택 C, 정답 C
+일단 single EC2 instance는 트래픽을 감당하기에 부족할 것으로 보인다.
+```
+
+7. An application saves the logs to an S3 bucket. A user wants to keep the logs for one month for troubleshooting purposes, and then purge the logs. What feature will enable this?
+```
+A. Adding a bucket policy on the S3 bucket.
+B. Configuring lifecycle configuration rules on the S3 bucket.
+C. Creating an IAM policy for the S3 bucket.
+D. Enabling CORS on the S3 bucket.
+```
+```
+선택 B, 정답 B
+S3 버킷 라이프사이클 설정으로 데이터 보관주기를 설정할 수 있을 것 같다.
+```
+
+8. An application running on EC2 instances processes sensitive information stored on Amazon S3. The information is accessd over the Internet. The security team is concerned that the Internet connectivity to Amazon S3 is a security risk. Which solution will resolve the security concern?
+```
+A. Access the data through an Internet Gateway.
+B. Access the data through a VPN connection.
+C. Access the data through a NAT Gateay.
+D. Access the data through a VPC endpoint for Amazon S3.
+```
+```
+선택 C, 정답 D
+VPC 엔드포인트에 대해서 공부가 필요할 것 같다.
+```
+
+9. An organization is building an Amazon Redshift cluster in their shared services VPC. The cluster will host sensitive data. How can the organization control which networks can access the cluster?
+```
+A. Run the cluster in a different VPC and connect through VPC peering.
+B. Create a database user inside the Amazon Redshift cluster only for users on the network.
+C. Define a cluster security group for the cluster that allows access from the allowed networks.
+D. Only allow access to networks that connect with the shared services network via VPN.
+```
+```
+선택 C, 정답 C
+security group을 사용하여 제한된 네트워크에서만 접근하도록 설정하는 것이 안전하다고 생각하였음. 사실 다른 선택지는 잘 이해 못함.
+```
+
+10. A Solutions Architect is designing an online shopping application running in a VPC on EC2 instances behind an ELB Application Load Balancer. The instances run in an Auto Scaling group across multiple Availability Zones. The application tier must read and write data to a customer managed database cluster. There should be no access to the database from the Internet, but the cluster must be able to obtain software patches from the Internet. Which VPC design meets these requirements?
+```
+A. Public subnets for both the application tier and the database cluster
+B. Public subnets for the application tier, and private subnets for the database cluster
+C. Public subnets for the application tier and NAT Gateway, and private subnets for the database cluster
+D. Public subnets for the application tier, and private subnets for the database cluster and NAT Gateway
+```
+```
+선택 C, 정답 C
+퍼블릭 서브넷 내 NAT Gateway와 프라이빗 서브넷 내 데이터베이스으로 구성하는 것이 보안적으로 유리하고 인터넷으로부터 업데이트를 받을 수 있는 구조로 알고 있음 
+```
+
+## 4. 강의 콘텐츠 선정
 [Udemy AWS SAA 강의](https://www.udemy.com/course/best-aws-certified-solutions-architect-associate/)
 ```
 EC2 - 솔루션스 아키텍트 어소시에이트 레벨
