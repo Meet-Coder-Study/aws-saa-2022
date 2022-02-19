@@ -4,10 +4,11 @@
 - [AWS Certified Solutions Architect Associate 자격증](https://aws.amazon.com/ko/certification/certified-solutions-architect-associate/)(이하 AWS SAA) 취득합니다.
 - 자격증 취득여부와 관계없이 시험응시를 최소한 1회 수행합니다.
 
-## 🗓 기간
+## 🗓 기간/일정
 - 일정 : 2022. 02. 14(월) ~ (미정)
 - OT : 2022. 02. 19(토) 20:00
 - 1주차: 2022. 02. 21(월) ~ 2022. 02. 27(일)
+- [스터디 일정 스프레드시트](https://docs.google.com/spreadsheets/d/1pa6ZBTiX5rF3yu7xVZ_nFffUFRJgk7jWbCozr3dP3nI/edit?usp=sharing)
 
 ## 📈 진행
 - 매주 정기모임 2일전 23:59:59까지 Pull Request를 요청합니다.
@@ -20,7 +21,7 @@
 - 스터디 기간 중에 먼저 자격증을 취득하신 분은 남은 보증금을 돌려드리겠습니다.
 - 벌금으로 보증금을 모두 사용한 경우 스터디에서 제외됩니다.
 - 벌금은 회식비/운영비로 사용하거나 환급해드립니다.
-- 보증금 사용 내역은 공개하겠습니다.
+- [보증금 적립/사용 내역은 공개됩니다.](https://docs.google.com/spreadsheets/d/1pa6ZBTiX5rF3yu7xVZ_nFffUFRJgk7jWbCozr3dP3nI/edit?usp=sharing)
 
 ## 😭 벌금
 - 과제 미제출시 벌금을 보증금에서 차감합니다.
@@ -43,6 +44,7 @@
 - 과제마감은 반드시 정기밋업 전으로 설정해주세요.
 - 예를 들어 토요일 저녁이 정기 밋업이면 금요일 23:59까지 PR으로 제출합니다.
 - 정기밋업 1시간 내외의 시간을 발제자가 리딩합니다.
+- 발제자는 스터디를 리딩하기 때문에 벌금에 적용을 받지 않습니다. 해당주차 리딩이 어려울 경우 반드시 호스트와 스터디원에게 공유하고 일정을 조정합니다!
 ### 모의고사 풀이 및 리뷰
 - 모의고사를 각자 나누어서 풀이/해설을 제출합니다.
 - 모의고사 과제는 호스트가 분배하겠습니다.
