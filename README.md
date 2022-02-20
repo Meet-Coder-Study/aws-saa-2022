@@ -65,4 +65,5 @@
 ## 😎 참고
 - [공식 AWS SAA 시험 안내서](https://d1.awsstatic.com/ko_KR/training-and-certification/docs-sa-assoc/AWS-Certified-Solutions-Architect-Associate_Exam-Guide.pdf)
 - [비공식 AWS 공인 솔루션스 아키텍트 - 어소시에이트 SAA-C02 (2020년 3월 출시) 수험 가이드](https://github.com/serithemage/AWSCertifiedSolutionsArchitectUnofficialStudyGuide)
+- [AWS 트레이닝 자료 저장소](https://github.com/serithemage/AWS_class_resources)
 - [2021년 AWS 자격증 취득 가이드](https://docs.google.com/presentation/d/1tsnHz01Qkd9tSRASv03PL3jqTP095DgvYLO0H2PwDnU/edit?usp=sharing)
