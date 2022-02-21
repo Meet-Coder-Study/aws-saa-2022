@@ -1,6 +1,7 @@
 # 2주차 과제
 - [Udemy AWS SAA 강의](https://www.udemy.com/course/best-aws-certified-solutions-architect-associate) 내 `고기용성 및 스케일링성: ELB 및 ASG`을 수강합니다.
 - 아래의 과제를 수행하여 제출합니다.
+- 과제제출 기한: 2/27(일) 23:59 (정기밋업: 3/1(화) 20:00)
 
 ## 제출방법
 - 본인의 이름으로 week2 하위에 폴더를 생성하여 파일을 작성합니다.
