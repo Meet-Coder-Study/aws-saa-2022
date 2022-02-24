@@ -17,7 +17,9 @@
   - ALB, NLB <-> ALB 연결 가능
 - Reverse Proxy 방식의 ALB/CLB와 달리 리턴 트래픽은 ELB가 관여하지 않는다.
   - ![nlb-return](./img/nlb/nlb-return.png)
-  
+- 교차 로드 밸런싱은 기본적으로 비활성화 되어있다.
+  - 일정 금액을 지불하면 활성화 할 수 있다.
+
 <br>
 
 ## 2. CLB 실습 과정

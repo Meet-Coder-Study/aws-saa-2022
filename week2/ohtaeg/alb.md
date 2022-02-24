@@ -20,6 +20,8 @@
   - EC2 Tasks
   - Lambda functions
   - Private IP Address
+- 교차 로드 밸런싱은 항상 켜져있고, 비활성화 할 수 없다.
+  - 항상 켜져있기에 돈이 들지 않는다.
   
 <br>
 
