@@ -133,6 +133,12 @@ ELB에 연결된 인스턴스를 늘렸다가 줄였다 하는 것
 
 ------
 
+### **실습**
+
+[실습내용](https://elderly-yak-238.notion.site/ELB-ASG-fd867aece65a4ffc87473449b8ad2536)
+
+------
+
 ### **고가용성 및 스케일링성 퀴즈**
 
 [퀴즈 내용](https://elderly-yak-238.notion.site/ELB-ASG-0f3aa50818e94065a73d4ea4621cd115)
