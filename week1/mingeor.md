@@ -1,17 +1,18 @@
 ## Classic Load Balancer (CLB) 실습
-
+![img](./mingeorImg/clb.png)
 
 ## Application Load Balancer (ALB) 실습
-
+![img](./mingeorImg/alb.png)
 
 ## Network Load Balancer (NLB) 실습
-
+![img](./mingeorImg/NLB.png)
 
 ## Auto Scaling Group (ASG) 실습
-
+![img](./mingeorImg/ASG.png)
 
 ## Auto Scaling Group (ASG) 실습 - 스케일링 정책 실습
-
+![img](./mingeorImg/Policy1.png)
+![img](./mingeorImg/Policy2.png)
 
 ## 퀴즈 풀이
 
