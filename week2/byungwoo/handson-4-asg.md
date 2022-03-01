@@ -23,7 +23,7 @@ echo "<h1>Hello World from $(hostname -f)</h1>" > /var/www/html/index.htmlks-
 ```
 ### ASG & EC2 확인
 - EC2 > ASG > Activity, Instance Management 확인
-- EC2 > TG > my-first-target-group > Registerd targets 확인
+- EC2 > TG > my-first-target-group > Registered targets 확인
 ```bash
 curl ${DemoALB_Public_DNS}
 ```
@@ -32,4 +32,4 @@ curl ${DemoALB_Public_DNS}
 - EC2 > ASG > DemoASG > Details
 - min, desired, max 조정
 - EC2 > ASG > Activity, Instance Management 확인
-- EC2 > TG > my-first-target-group > Registerd targets 확인
+- EC2 > TG > my-first-target-group > Registered targets 확인
