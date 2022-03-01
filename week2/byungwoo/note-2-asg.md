@@ -1,4 +1,6 @@
-## ASG (Auto Scaling Group)
+# Auto Scaling Group
+
+## ASG
 - scale-out  to match increased load
 - scale-in to match decreased load
 - Automatically Register new instances to LB

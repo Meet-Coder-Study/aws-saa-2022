@@ -11,8 +11,7 @@
 - Target Value 40
 ```
 ### Details > Group Details
-- Group Details 수정: min=1, desired=1, max=3 
-
+- Group Details 수정: min=1, desired=1, max=3
 
 ## 2. EC2 > ASG > DemoASG > Instance Management
 - 인스턴스에 부하주기
