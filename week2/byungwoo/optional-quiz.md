@@ -11,7 +11,7 @@ D. Application Load Balancer
 런칭할 서버의 세부 타입은 LT(혹은 LC)에서 정의한다.
 ```
 
-2. Healthcheck에서 Elasitc Load Balacing이 실패하면 어떤일이 발생하나요? (Choose the best appropriate answer)
+2. Elastic Load Balancing에서 health check 실패시 어떤일이 발생하나요? (Choose the best appropriate answer)
 ```
 A. Elasitc Load Balancing이 실패하면 다른 Load Balancer를 실행시킴
 B. Elasitc Load Balancing이 인스턴스가 응답할 때까지 계속 회신을 요청함
@@ -72,7 +72,7 @@ D. 위에 보기 중에 없음
 모든 LB는 헬스체크 기능을 가진다.
 ```
 
-1. 컨텐츠 캐싱 장점을 최대한 살리기 위해 동일 인스턴스에 대해 반복적으로 요청을 전달하는 기술은?
+7. 컨텐츠 캐싱 장점을 최대한 살리기 위해 동일 인스턴스에 대해 반복적으로 요청을 전달하는 기술은?
 ```
 A. sticky session
 B. multi availablity zone 활용
@@ -94,10 +94,10 @@ D. 콘솔에서 ELB를 생성할 때 내부용(internal) 또는 외부용(intern
 정답 D
 ELB에는 인터넷 게이트웨이를 attach/detach할 수 없다.
 더불어 Private Subnet에 인스턴스를 생성하고 ELB와 연결하는 것도 불가능하다.
-VPC에서 인터넷 게이트웨이를 붙이지 않더라도 외부영(Internet-Facing) ELB를 추가하면 인터넷 연결이 가능해진다.
+VPC에서 인터넷 게이트웨이를 붙이지 않더라도 외부용(Internet-Facing) ELB를 추가하면 인터넷 연결이 가능해진다.
 ```
 
-9. 다음주 맞는 것을 2개 고르세요.
+9. 다음 중 맞는 것을 2개 고르세요.
 ```
 A. ELB는 다수의 Region 간에 트래픽 분산 가능
 B. ELB는 다수의 AZ 간에 트래픽 분산 가능하지만 다수의 Region 간에는 트래픽 분산 불가
