@@ -15,7 +15,7 @@
 ## ASG attributes
 - ASG 생성시 필요한 속성들
 - Launch Configuration (LC)
-  - AMI, Instnace Type
+  - AMI, Instance Type
   - EC2 User Data
   - EBS Volumes
   - Security Groups
@@ -41,7 +41,7 @@
 - can create scaling policies based on custom metric
 - ex) number of connected users
   1. send custom metric from app on EC2 to CloudWatch (PutMetric API)
-  2. create ClougWatch alarm as scaling policy for ASG
+  2. create CloudWatch alarm as scaling policy for ASG
 
 ## ASG Tips
 - Scaling policies can be based on CPU, Network and custom metric, or schedule
