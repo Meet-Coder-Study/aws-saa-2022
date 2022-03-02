@@ -127,7 +127,7 @@
 - Layer 3 (Network Layer) - IP Packets
 - 2개의 기능 통합
   - Transparent Network GW - single entry/exit for all traffic
-  - Load Balancer - distribute traffic to your vitual appliances
+  - Load Balancer - distribute traffic to your virtual appliances
 - GENEVE protocol, port 6801
 
 ## GWLB Target Groups (TG)
