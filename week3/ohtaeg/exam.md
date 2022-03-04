@@ -482,11 +482,273 @@ Direct Connect
 <br>
 <br>
 
-### 번 문제
+### 15번 문제
 ![practice-exam-15](./img/practice-exam-15.png)
 ```
 선택 : (C)
+
+문제 요구 사항
+XSS 와 SQL Injection 방어를 위한 추천 솔루션은?
+
+A - AWS Shield는 DDos 공격을 방어하는 개념으로 알고있어서 XSS와 SQL Injection을 방어해주는지 몰라서 일단 제거
+B - A와 마찬가지 이유
+C - public한 CloudFront에서 처리해주면 좋겠다고 생각하고 있었는데, 규칙을 설정한다해서 확실치는 않지만 느낌으로 찍음 
+D - 인스턴스에서 처리하는 방식이기에 public한 CloudFront는 그대로 노출되어 위험할 것아서 제거 
 ```
 ```
 정답 : (C)
+
+A - Shield Advanced는 DDoS 공격으로부터 보호하지만, 크로스 사이트 스크립팅 또는 SQL 명령어 삽입으로부터 보호하지는 않습니다.
+
+B - Firewall Manager를 사용하면 AWS WAF, Shield Advanced 및 기타 AWS 서비스를 관리할 수 있습니다.
+Shield Advanced는 DDoS 공격으로부터 보호하지만, 크로스 사이트 스크립팅 또는 SQL 명령어 삽입으로부터 보호하지는 않습니다.
+
+C - AWS WAF는 악성일 가능성이 있는 SQL 코드(SQL 명령어 삽입이라고 함)의 존재를 감지할 수 있습니다. 
+또한 AWS WAF는 악성일 가능성이 있는 스크립트(크로스 사이트 스크립팅이라고 함)의 존재를 감지할 수 있습니다.
+
+D - Firewall Manager를 사용하면 AWS WAF, AWS Shield Advanced 및 기타 AWS 서비스를 관리할 수 있습니다. 
+Firewall Manager는 EC2 인스턴스에 설치되지 않은 관리형 서비스입니다.
+
+AWS Shield란?
+- AWS는 DDoS 공격을 차단하기 위해 AWS Shield Standard와 AWS Shield Advanced을 제공
+  - Standard는 비용 x, Advanced는 비용 o
+  - AWS Shield Advanced 적용 가능 대상
+  - Amazon CloudFront 배포
+  - Amazon Route 53 호스팅 영역
+  - AWS Global Accelerator 액셀러레이터
+  - Application Load Balancers
+    - NLB에 적용 불가, 그래서 EIP를 통해 해야한다. 
+  - Amazon EC2 EIP
+  
+AWS WAF란?
+- 요청이 시작되는 IP 주소 또는 쿼리 문자열의 값 등 지정하는 조건에 따라 보호되는 리소스에 접근할 수 있거나
+- HTTP 403 상태 코드 (금지됨) 로 요청에 응답할 수 있다.
+- 요청이 차단될 때 사용자 지정 오류 페이지를 반환하도록 CloudFront를 구성할 수 있다.
+
+Firewall Manager란?
+- 여러 계정과 리소스의 관리 및 유지 관리 작업을 간소화한다.
+- 계정의 리소스를 보호할 수 있다.
+- Amazon CloudFront 배포와 같은 특정 유형의 리소스를 모두 보호할 수 있다.
+- 특정한 태그를 가진 리소스를 모두 보호할 수 있다.
+
+```
+
+<br>
+<br>
+
+### 16번 문제
+![practice-exam-16](./img/practice-exam-16.png)
+```
+선택 : (D)
+
+문제 요구 사항
+오래 저장할 수 있어야하고 저장하면 거의 엑세스가 없지만 접근하게 되면 2시간 이내에 엑세스가 가능해야한다.
+
+A - AWS Direct Connect는 네트워크간 private 연결을 위해 사용되는거라 성격이 달라 제거
+B - S3라서 후보군에 뒀지만 Glacier이 뭔지 몰라 제거
+C - 데이터 엑세스는 EBS 및 스냅샷이랑 관련 없는 것 같아 제거
+D - Infrequent : 드문이란 뜻을 갖고있어서 S3에 접근 관련한 기능인 것 같아 선택
+```
+```
+정답 : (B)
+
+A.
+[EFS] 
+- 애플리케이션 중단할 필요 없이 확장되므로 사용자가 용량을 프로비저닝 및 관리할 필요 없음
+- 확장 및 비용 최적화할 수 있게 해주는 서버리스 파일 시스템
+- On-premise 서버는 Direct Connect & VPN 연결을 통해 파일 시스템 탑재
+- AWS 클라우드 및 사내 서버의 컴퓨팅 인스턴스에 사용할 공유 file 스토리지
+- 수천 대의 EC2 인스턴스 간 파일 시스템 공유
+
+B - S3 버킷에 데이터를 저장하면 데이터를 위한 비용 효율적인 초기 위치가 제공됩니다. 
+[S3 Glacier는 2시간 검색 시간] 요구 사항을 충족하는 가장 비용 효율적인 아카이브 스토리지 솔루션입니다.
+
+C - S3 뿐만 아니라 EBS도 사용해야하는 부분에서 비용적인 측면에서 효율적이지 않음
+
+[EBS]
+- 파일 시스템 생성하고 파일 저장
+- 단일 EC2 인스턴스의 전용 블록 스토리지
+- 볼륨의 크기를 변경은 수동적인 작업
+
+D.
+[S3 Standard-IA] : 수명이 길지만 자주 엑세스하지 않는 데이터, 즉시 접근 가능해야할 때
+[Glacier] : 장기적으로 보관할 데이터, 즉시 접근 가능할 필요 없을 때, Standard IA보다 비용 절감
+[Glacier Deep Archive]: 1년에 한 두 번정도만 엑세스하는 데이터 장기 보관
+
+https://aws.amazon.com/ko/efs/faq/
+질문: Amazon EFS와 Amazon EBS와 Amazon S3는 각각 어떤 경우에 사용해야 합니까? 참고
+```
+
+<br>
+<br>
+
+### 17번 문제
+![practice-exam-17](./img/practice-exam-17.png)
+```
+선택 : (B)
+
+문제 요구 사항
+- 400GB 스토리지가 필요
+- 40,000 Network Input/Output Operation Per Second, 초당 입출력 속도를 지원
+
+A - 인스턴스 스토어 스토리지가 뭔지 몰라 제거
+B - 프로비저닝된 IOPS SSD는 최대 64,000IOPS를 지원한다고 알고있어서 선택
+C - 처리량 최적화 HDD는 천 이하 IOPS를 지원하는 것으로 알고있어서 제거
+D - 그냥 제거
+```
+```
+정답 : (A)
+
+A - SSD 지원 스토리지 최적화(i2) 인스턴스는 임의로 [365,000 IOPS] 이상을 제공합니다. 
+인스턴스 스토어는 인스턴스의 정규 시간당 요금에 비해 추가 비용이 없습니다.
+?? i2 유형이 문서에서 검색이 되질 않음
+https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/storage-optimized-instances.html#storage-instances-diskperf
+지문 오류인듯 해보인다.
+
+B - 프로비저닝된 IOPS SSD(io1 또는 io2) EBS 볼륨은 시나리오에 필요한 40,000IOPS 이상을 제공할 수 있습니다.
+하지만 Amazon EBS는 시간당 인스턴스 요금에 비용을 추가하므로 이 솔루션은 인스턴스 스토어만큼 비용 효율적이지 않습니다. 
+
+C - 최대 500 IOPS
+
+D - 스크래치 볼륨 공간에 필요한 데이터가 빠르게 변화하므로 Amazon S3(객체 스토리지)를 잘못된 스토리지로 만듭니다.
+블록 스토리지는 읽기/쓰기 기능을 원활하게 작동하도록 하는 데 적합합니다.
+
+```
+
+<br>
+<br>
+
+### 18번 문제
+![practice-exam-18](./img/practice-exam-18.png)
+```
+선택 : (D)
+
+A - Standard 메시징 큐
+B - EC2에서 SMTP 를 구성해서 이메일은 보낼 수 있겠으나 적절한 솔루션이 아닌 것 같아 제거
+C - FIFO 메시지 큐
+D - 이메일 알림 서비스라 선택
+
+FIFO SQS와 표준 대기열 SQS의 차이는?
+
+1. 메시지가 삭제되지 않은 개수
+- 표준: 120,000개
+- FIFO: 20,000개
+
+2. Standard 
+- 최대 처리량, 무제한에 가까운 메시지 전송 지원 (최대 처리량), 제한이 없는 TPS
+- Best effort 순서, 메시지 순서 보장 안됨
+- 최소 1회 전달 제공, 대신 중복 전송될수도 있다.
+
+3. FIFO
+- 초당 300TPS 제한 존재
+- 정확한 순서의 보장, 다만 순서를 위해 느림
+- 정확히 1번 실행, 중복 수신 x
+```
+```
+정답 : (D)
+
+A - Amazon SQS는 소프트웨어 구성 요소 간에 메시지를 전송하는 완전관리형 메시지 대기열 서비스입니다. 하지만 Amazon SQS는 고객에게 메시지를 푸시할 수 없습니다.
+B - 회사에서 EC2 인스턴스를 배포하여 애플리케이션을 실행할 수 있습니다. 하지만 이 솔루션이 관리형 서비스만 사용하는 것은 아닙니다.
+C - Amazon SQS는 소프트웨어 구성 요소 간에 메시지를 전송하는 완전관리형 메시지 대기열 서비스입니다. 하지만 Amazon SQS는 고객에게 메시지를 푸시할 수 없습니다.
+D - Amazon SNS는 애플리케이션 간 통신 및 애플리케이션과 사용자 간 통신을 위한 완전관리형 메시징 서비스입니다.
+```
+
+<br>
+<br>
+
+### 19번 문제
+![practice-exam-19](./img/practice-exam-19.png)
+```
+선택 : (A)
+
+문제 요구사항
+- RDB
+- 비활성 기간 존재
+- 최소 비용
+
+A - 잘 모르겠지만 ECS 와 RDB인 Aurora를 사용한다여 선택 
+도현님이 말씀하시길 비용 관련 문제는 관리형 리소스가 설치형보다 싸다고 하여 선택
+
+B - 버스트 기능 이라는게 뭔지 모르겠지만 비싸보임
+
+C - 관리형 서비스를 이용하는 것이 아닌 직접 오픈소스를 설치해서 사용하기에 제거
+
+D - 관리형 서비스를 이용하는 것이 아닌 직접 오픈소스를 설치해서 사용하기에 제거
+```
+```
+정답 : (A)
+
+A - Amazon ECS에서 컴퓨팅에 Fargate를 사용하는 경우 애플리케이션이 유휴 상태일 때 비용이 발생하지 않습니다. 
+또한 [Aurora Serverless]는 [유휴 상태일 때 컴퓨팅 비용이 발생하지 않습니다].
+
+B - EC2 버스트 가능 인스턴스는 크기 조정 없이 버스트 가능한 기능을 제공합니다. 
+하지만 이 솔루션은 비활성 기간 동안 비용을 최소화하지 않으므로 가장 비용 효율적인 옵션이 아닙니다.
+Amazon Redshift 데이터베이스는 OLTP에 적합하지 않습니다.
+Amazon Redshift는 온라인 분석 처리(OLAP)를 위해 특별히 설계되었습니다.
+
+C - 코드형 인프라(IaC)는 가용성에 도움이 되지만 이 솔루션은 상시 사용 가능 요구 사항을 충족하지 못합니다. 
+또한 이 솔루션은 데이터베이스를 다시 생성한 이후에 데이터베이스 데이터를 유지할 수 없습니다.
+
+D - 이 솔루션을 사용하면 비활성 기간 동안 하나 이상의 인스턴스와 데이터베이스가 실행됩니다.
+그러나 이 솔루션은 비활성 기간 동안 비용을 최소화하지 않으므로 가장 비용 효율적인 옵션이 아닙니다.
+
+AWS Fargate
+- 별도로 인스턴스를 생성 관리하지 않고 컨테이너를 실행하기 위해 Amazon ECS에서 사용하는 기술
+- 컨테이너의 CPU와 메모리 사용량에 기반하여 초 단위로 요금을 과금
+- 1년 또는 3년 단위의 Compute Savings Plan 요금제를 이용하여 절약가능
+- 1년 전체 선결제시 27%, 3년 전체 선결제시 47%를 절약할 수 있다.
+
+Amazon Redshift
+- 페타바이트급 데이터 웨어하우스
+- RDB이지만 데이터웨어 하우스를 위한 DB로, 분석에 집중
+- 대량의 데이터를 분석하고 BI를 통해 분석리포트를 제공하는 것에 특화되어있으며(OLAP) OLTP용으로는 적합하지 않습니다.
+
+```
+
+<br>
+<br>
+
+### 20번 문제
+![practice-exam-20(1)](./img/practice-exam-20(1).png)
+![practice-exam-20(2)](./img/practice-exam-20(2).png)
+```
+선택 : (B)
+
+문제 요구사항
+- 한 달에 한 번 모든 데이터를 온프레미스 위치로 복제
+- 평균 데이터 양은 60TB
+- 효율적인 전송 방법은?
+
+A - Snowball Edge Storage Optimized가 뭔지 몰라 제거, 그리고 일주일 후에 디바이스를 반환해야한다는 번거로움이 있는 거 같아서 제거
+B - S3 Standard IA를 못보고 지문이 젤 길어서 선택..
+C - S3 Standard IA 라서 제거
+D - CloudFront 내용이 아닌 것 같아서 제거
+```
+```
+정답 : (A)
+
+A - 기본 가격에는 디바이스와 10일간의 온프레미스 위치 사용 기간이 포함됩니다.
+회사에서 1주일 이내에 디바이스를 반환할 경우 기본 가격과 AWS에서 데이터를 전송하는 데 필요한 가격을 지불합니다.
+
+Snowball Edge Storage Optimized: TB~PB사이즈의 데이터를 AWS로 빠르고 안전하게 전송해야할 때 사용
+
+B - S3 Standard-IA 스토리지를 사용하는 다른 S3 버킷에 모든 데이터를 복사하는 경우 비용상의 이점이 없습니다. 
+이 솔루션은 추가 복제를 수행하면 비용이 증가하므로 가장 비용 효율적인 옵션은 아닙니다.
+
+Aws Storage Gateway : S3는 REST/HTTP 기번이기 때문에 네트워크 지연의 문제가 있을 수 있음
+이를 개선하기 위한것이 storage gateway임.
+온프레미스 환경에서 Cloud 상의 스토리지를 지원하게 할 수 있는 Gateway 역할을 한다. 즉 [백업 툴]이라고 볼 수 있다.
+레거시 환경에서 온프레미스 환경에서 데이터를 보관하는 서비스를 위해 백업 전용 게이트 웨이임.
+레거시 환경에서 AWS로 마이그레이션 할 수 있는 방법 중 하나.
+
+Aws Storage Gateway File Gateway : on-premise 스토리지에 저장된 파일을 object로 변환하여 S3에 저장하는 게이트웨이 서비스
+on-premise 스토리지의 파일을 block storage인 S3의 오브젝트로 변환하여 데이터를 저장
+NFS - Network File System, Linux
+SMB - Server Message Block, Windows
+
+C - S3 Standard-IA 스토리지를 사용하는 다른 S3 버킷에 모든 데이터를 복사하는 경우 비용상의 이점이 없습니다.
+이 솔루션은 추가 복제를 수행하면 비용이 증가하므로 가장 비용 효율적인 옵션은 아닙니다.
+
+D - CloudFront로의 데이터 전송은 무료이지만, CloudFront에서 온프레미스 위치로 60TB의 데이터를 전송하려면 비용이 발생합니다.
+이 옵션의 비용은 AWS Snowball Edge Storage Optimized 디바이스를 사용하는 옵션의 약 2배에 해당합니다.
 ```
