@@ -601,9 +601,10 @@ D - 그냥 제거
 
 A - SSD 지원 스토리지 최적화(i2) 인스턴스는 임의로 [365,000 IOPS] 이상을 제공합니다. 
 인스턴스 스토어는 인스턴스의 정규 시간당 요금에 비해 추가 비용이 없습니다.
-?? i2 유형이 문서에서 검색이 되질 않음
-https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/storage-optimized-instances.html#storage-instances-diskperf
-지문 오류인듯 해보인다.
+
+https://aws.amazon.com/ko/ec2/previous-generation/
+i2는 이전 세대 인스턴스 유형인 것 같다.
+인스턴스 스토어 스토리지는 비용이 EBS처럼 시간당 요금이 아닌 I/O마다 발생한다.
 
 B - 프로비저닝된 IOPS SSD(io1 또는 io2) EBS 볼륨은 시나리오에 필요한 40,000IOPS 이상을 제공할 수 있습니다.
 하지만 Amazon EBS는 시간당 인스턴스 요금에 비용을 추가하므로 이 솔루션은 인스턴스 스토어만큼 비용 효율적이지 않습니다. 
