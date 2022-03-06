@@ -116,7 +116,6 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 
 - [Site-to-Site VPN](https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/VPC_VPN.html)이란 VPC에서 고객의 원격 네트워크에 대한 액세스를 활성화하는 기능이다.
 - [Site-to-Site VPN은 다음과 같은 구성요소를 가지고 있다.](https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/how_it_works.html)
-
   - 가상 프라이빗 게이트웨이
   - Transit Gateway
   - 고객 게이트웨이 디바이스
