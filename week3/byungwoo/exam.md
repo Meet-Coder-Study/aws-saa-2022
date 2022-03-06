@@ -1,6 +1,5 @@
-- [시험링크](https://explore.skillbuilder.aws/learn/course/9160/play/30304/iyong-jichim-aws-certification-official-practice-question-sets-korean)
-
 # AWS Certified Solutions Architect - Associate Official Practice Question Set (SAA - Korean)
+- [시험링크](https://explore.skillbuilder.aws/learn/course/9160/play/30304/iyong-jichim-aws-certification-official-practice-question-sets-korean)
 
 ## 문제 1.
 
@@ -217,9 +216,7 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 - 프로비저닝된 SSD EBS는 높은 IOPS를 제공하나 비용 효율적이지 않음
 
 ## 문제 18.
-
 ![Untitled](questions/q18.png)
-
 ```bash
 선택 D
 정답 D
@@ -232,9 +229,8 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 ```
 선택 A
 정답 A
-
 ```
-- 활성기간에만 요금을 지불하려면 Fargate, Serverless를 사용해야 비용효율적임 
+- 활성기간에만 요금을 지불하려면 Fargate, Serverless를 사용해야 비용 효율적임
 
 ## 문제 20.
 
@@ -246,4 +242,3 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 ```
 - 일단 복제는 비용효율적인 방법은 아님
 - [AWS Snowball이 온프레미스 위치로 배송이 가능한 줄 몰랐음](https://aws.amazon.com/ko/snowball/pricing/)
-  
