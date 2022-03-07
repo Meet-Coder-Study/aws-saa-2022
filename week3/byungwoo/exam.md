@@ -160,23 +160,18 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 - [Amazon Cognito](https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/what-is-amazon-cognito.html)를 사용하면 웹/앱에 대한 인증/권한 관리를 제공한다.
 
 ## 문제 14.
-
 ![Untitled](questions/q14.png)
-
 ```
 선택 AE
 정답 AE
 ```
-
-- 프라이빗 서브넷을 사용하는 것과 보안그룹을 사용하는 것이 DB 인스턴스 접근제어 보안을 강화하는 것으로 볼 수 있음
-- 탄력적 네트워크 인터페이스는 보안과 관련이 없음
+- 프라이빗 서브넷을 사용하는 것과 보안그룹을 사용하는 것이 DB 인스턴스 접근제어를 통해서 보안을 강화 것으로 볼 수 있음
+- [탄력적 네트워크 인터페이스(ENI)](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/using-eni.html)는 보안 강화와는 관련이 없음
 - [Shield](https://docs.aws.amazon.com/ko_kr/waf/latest/developerguide/shield-chapter.html)는 DDos 공격을 차단하기 위해 사용되지만 접근제어와는 관련이 없음
-- [Direct Connect](https://aws.amazon.com/ko/directconnect/features/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc)는 온프레미스에서 AWS로 네트워크 연결을 쉽게 설정할 수 있는 서비스이지 보안과는 관련이 없어 보임
+- [Direct Connect(DX)](https://aws.amazon.com/ko/directconnect/features/?whats-new-cards.sort-by=item.additionalFields.postDateTime&whats-new-cards.sort-order=desc)는 온프레미스에서 AWS로 네트워크 연결을 쉽게 설정할 수 있는 서비스이지 보안과는 관련이 없음
 
 ## 문제 15.
-
 ![Untitled](questions/q15.png)
-
 ```
 선택 D
 정답 C
@@ -234,10 +229,10 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 ## 문제 20.
 
 ![Untitled](questions/q20.png)
-
 ```
 선택 B
 정답 A
 ```
-- 일단 복제는 비용효율적인 방법은 아님
-- [AWS Snowball이 온프레미스 위치로 배송이 가능한 줄 몰랐음](https://aws.amazon.com/ko/snowball/pricing/)
+- (A) [AWS Snowball에는 온디멘드 요금에는 10일간의 디바이스 사용과 외부로의 데이터 전송에 대해서만 요금을 지불하면 됨](https://aws.amazon.com/ko/snowball/pricing/) 
+- (B,C) 일단 새로운 S3 버킷으로 복제하는 것 자체가 비용효율적인 방법이 아님 
+- (D) [CloudFront를 통해서 S3 버킷 객체를 전송하는 것도 비용이 발생함](https://aws.amazon.com/ko/cloudfront/pricing/) 
