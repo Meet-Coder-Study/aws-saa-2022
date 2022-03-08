@@ -10,7 +10,7 @@
 정답 D
 ```
 - SQS의 메세지 백로그가 증가하고 사용자가 처리 지연을 보고하고 있다는 것은 컨슈머 어플리케이션이 부족하다는 것으로 볼 수 있다.
-- 이를 유연하게 대응하기 위해서는 ASG를 구성하는데 특정 지표를 기반으로 해아하는데 [ApproximaeNumberOfMessage](https://docs.aws.amazon.com/ko_kr/autoscaling/ec2/userguide/as-using-sqs-queue.html) 지표로 사용할 수 있다고 판다했다.
+- 이를 유연하게 대응하기 위해서는 ASG를 구성하는데 특정 지표를 기반으로 해아하는데 [ApproximaeNumberOfMessage](https://docs.aws.amazon.com/ko_kr/autoscaling/ec2/userguide/as-using-sqs-queue.html) 지표로 사용할 수 있다고 판단했다.
 
 ## 문제 2.
 
@@ -103,7 +103,7 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 ```
 
 - 높은 IOPS를 위해서는 SSD를 사용해야하고 범용은 아닌 것 같았음
-- [Amazon EBS 볼륨 유형 내 SSD(Solid-State Drive) 참고]()
+- [Amazon EBS 볼륨 유형 내 SSD(Solid-State Drive) 참고](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ebs-volume-types.html#solid-state-drives)
 
 ## 문제 10.
 
@@ -131,7 +131,7 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 정답 B
 ```
 
-- key-value 데이터모델은 NoSQL이며 높은 읽기 빈도와 성능이 필요함
+- key-value 데이터 모델은 NoSQL이며 높은 읽기 빈도와 성능이 필요함
 - [DynamoDB Accelerator(DAX)](https://aws.amazon.com/ko/dynamodb/dax/)(캐시)를 활용하여 DynamoDB의 읽기 성능을 극대화할 수 있음
 - Aurora -> RDBMS
 - Neptune -> GraphDB
