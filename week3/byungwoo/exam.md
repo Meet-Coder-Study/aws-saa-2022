@@ -90,7 +90,7 @@ S3 버전 관리를 사용하여 한 버킷에 여러 버전의 객체를 보관
 
 ```
 
-- [S3 Transfer Acceleration](https://aws.amazon.com/ko/s3/transfer-acceleration/)은 업로드 시간을 단축하는 것이지 큰 파일 업로드의 실패를
+- [S3 Transfer Acceleration](https://aws.amazon.com/ko/s3/transfer-acceleration/)은 업로드 시간을 단축하는 것이지 큰 파일 업로드의 실패를 막아주지는 않는다.
 - 크기가 큰 파일은 [멀티파트 업로드](https://aws.amazon.com/ko/s3/transfer-acceleration/)를 사용한다.
 
 ## 문제 9.
