@@ -2,8 +2,7 @@
 - 이후의 스터디 커리큘럼
 
 # 우리가 가진 리소스
-1. Udemy 강의
-  - Section3 ~ 25 (23회차)
+1. Udemy 강의 내 퀴즈
 2. Udemy 강의 내 모의고사 1회
 3. Exam Readiness (Korea) - 2시간 강의 (연습문제풀이 포함)
 4. Udemy 모의고사 6회
