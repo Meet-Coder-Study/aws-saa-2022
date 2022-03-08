@@ -295,7 +295,7 @@ B. IAM 사용자 및 그룹
 > A와 동일.
 
 C. Amazon Cognito 사용자 풀
-> 정답
+> 정답. Amazon Cognito는 웹 및 모바일 앱에 대한 인증, 권한 부여 및 사용자 관리를 제공
 
 D. AWS Security Token Serviceo(STS)
 > STS는 `임시 보안 자격 증명을`을 생성할 수 있는 기능이다. 애플리케이션에 대한 액세스를 제어 하지 않는다.
