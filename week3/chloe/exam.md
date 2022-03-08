@@ -208,9 +208,22 @@
 ```
 - A) Shield Advanced는 DDoS 공격으로부터 보호하지만,  **SQL Injection**과 **Cross-Site Scripting(XSS)**으로부터 보호하지는 않는다
   - [AWS Shield](https://docs.aws.amazon.com/ko_kr/waf/latest/developerguide/shield-chapter.html) 참고
+    -  AWS Shield의 종류
+       - AWS Shield Standard
+         - AWS WAF 및 기타 AWS 서비스에 대해 이미 지불한 비용 외에 다른 추가 비용 없이 자동으로 포함된다
+       - AWS Shield Advanced
+    - Shield Advanced를 적용할 수 있는 리소스
+      - Amazon CloudFront Distributions
+      - Amazon Route 53 hosted zones
+      - AWS Global Accelerator standard accelerators
+      - Amazon EC2 Elastic IP addresses
+      - ELB (Elastic Load Balanc)
+        - ALB
+        - CLB
+        - NLB (Amazon EC2 Elastic IP를 통해서 가능) 
 - B) Firewall Manager를 사용하면 AWS WAF, Shield Advanced 및 기타 AWS 서비스를 관리할 수 있지만, AWS Shiled Advanced는 DDoS 공격을 위한 것!
   - [AWS WAF, AWS Shield 및 AWS Firewall Manager란 무엇인가요?](https://docs.aws.amazon.com/ko_kr/waf/latest/developerguide/what-is-aws-waf.html) 참고
-- C) AWS WAF는 악성일 가능성이 있는 **SQL Injection**과 **Cross-Site Scripting(XSS)**를 감지할 수 있다
+- C) AWS WAF는 악성일 가능성이 있는 **SQL Injection**과 **Cross-Site Scripting(XSS)** 를 감지할 수 있다
   - [AWS WAF](https://docs.aws.amazon.com/ko_kr/waf/latest/developerguide/waf-chapter.html) 참고
 - D) Firewall Manager로 AWS WAF를 관리할 수 있지만, EC2 인스턴스에 설치되지 않는 관리형 서비스이다
 
@@ -250,6 +263,14 @@
 - A, C) Amazon SQS는 소프트웨어 구성 요소 간에 메시지를 전송하는 완전관리형 메시지 대기열 서비스이다
   - but, SQS로 고객에게 메시지를 푸시할 수는 없다!
   - [Amazon Simple Queue Service](https://aws.amazon.com/ko/sqs/) 참고
+    - `SNS vs SQS`
+      - **SNS**
+        - distributed **publish-subscribe** system
+        - Messages are pushed to subscribers as and when they are sent by publishers to SNS
+      - **SQS**
+        - distributed **queuing** system.
+        - Messages are not pushed to receivers. 
+        - Receivers have to poll or pull messages from SQS.
 - D) Amazon SNS는 애플리케이션 간 통신 및 **애플리케이션과 사용자 간** 통신을 위한 완전관리형 메시징 서비스이다
   - [Amazon SNS FAQ](https://aws.amazon.com/ko/sns/faqs/) 참고
     - 개발자에게 애플리케이션의 메시지를 게시하고 이를 구독자나 다른 애플리케이션에 즉시 전송할 수 있는 고도로 확장 가능하며 유연하고 비용 효율적인 기능을 제공한다
