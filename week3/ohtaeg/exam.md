@@ -305,14 +305,19 @@ D - HDD라 제거
 정답 : (B)
 
 IOPS : Input/Output Operation Per Second, 초당 입출력 속도
-IOPS 예로 MySQL과 MariaDB는 16KB 크기의 페이지를 사용함. 그래서 입출력 한번 당 16KB 단위로 전송.
+
+https://www.popit.kr/aws-ebselastic-block-storage%EC%9D%98-%EB%B9%84%EC%9A%A9-%EC%B5%9C%EC%A0%81%ED%99%94/
+
+IOPS 예로 MySQL과 MariaDB는 16KB 크기의 페이지를 사용함. 
+디스크에 데이터를 저장하는 가장 기본 단위를 페이지라 한다.
+그래서 입출력 한번 당 16KB 단위로 전송.
 매초 102,400KB (100MB)의 읽기 동작이 필요한 애플리케이션인 경우 16KB 페이지 크기의 데이터 베이스를 사용할 경우 초당 6,400 번의 읽기 동작을 해야 한다.
 즉 6,400 IOPS 이상의 성능을 가진 EBS볼륨이 필요
 
-A - 처리량 최적화 HDD EBS 볼륨
+A - 처리량 최적화 HDD EBS 볼륨 (st1)
 -> 각 볼륨에 대해 [500IOPS]로 제한되는 HDD 지원 스토리지 디바이스
 
-B - 프로비저닝된 IOPS SSD EBS 볼륨은
+B - 프로비저닝된 IOPS SSD EBS 볼륨은 (io1)
 -> 각 볼륨에 대해 [최대 64,000IOPS]를 제공합니다.
 
 C - 범용 SSD EBS 볼륨
@@ -321,6 +326,7 @@ C - 범용 SSD EBS 볼륨
 D - 콜드 HDD 볼륨
 -> IOPS가 아닌 처리량으로 성능을 정의하는 저비용 마그네틱 스토리지를 제공합니다.
 따라서 콜드 HDD 볼륨은 순차적인 대용량 콜드 데이터 워크로드에 적합
+-> [250 IOPS]를 지원
 ```
 
 <br>
@@ -605,6 +611,7 @@ A - SSD 지원 스토리지 최적화(i2) 인스턴스는 임의로 [365,000 IOP
 https://aws.amazon.com/ko/ec2/previous-generation/
 i2는 이전 세대 인스턴스 유형인 것 같다.
 인스턴스 스토어 스토리지는 비용이 EBS처럼 시간당 요금이 아닌 I/O마다 발생한다.
+https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/storage-optimized-instances.html
 
 B - 프로비저닝된 IOPS SSD(io1 또는 io2) EBS 볼륨은 시나리오에 필요한 40,000IOPS 이상을 제공할 수 있습니다.
 하지만 Amazon EBS는 시간당 인스턴스 요금에 비용을 추가하므로 이 솔루션은 인스턴스 스토어만큼 비용 효율적이지 않습니다. 
@@ -613,6 +620,23 @@ C - 최대 500 IOPS
 
 D - 스크래치 볼륨 공간에 필요한 데이터가 빠르게 변화하므로 Amazon S3(객체 스토리지)를 잘못된 스토리지로 만듭니다.
 블록 스토리지는 읽기/쓰기 기능을 원활하게 작동하도록 하는 데 적합합니다.
+
+
+
+# 인스턴스 스토어와 EBS는 어떤 차이가 있습니까?
+- https://aws.amazon.com/ko/premiumsupport/knowledge-center/instance-store-vs-ebs/
+
+[인스턴스 스토어]
+- 인스턴스 스토어는 EC2에 직접 연결된 블록 디바이스 스토리지 형태인 [인스턴스 스토어](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) 라는 스토리지를 제공한다.
+- 인스턴스 스토어 볼륨에 저장된 데이터는 인스턴스 중지, 종료 또는 하드웨어 장애에 대한 영구성을 제공 X. 즉 휘발성
+- 인스턴스 스토어 볼륨은 인스턴스의 사용 요금의 일부로 포함됩니다.
+  - https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/InstanceStorage.html
+
+[EBS]
+- 인스턴스 중지 및 종료 시에도 데이터를 보존해 주고, EBS 스냅샷을 통해 손쉽게 백업할 수 있고, 
+  한 인스턴스에서 데이터를 제거하여 다른 인스턴스에 재연결할 수 있고, 전체 볼륨 암호화를 지원합니다.
+- 비용은 볼륨크기에 대한 비용과 IO비용이 추가 부가 + 월별 비용
+  - https://aws.amazon.com/ko/ebs/pricing/
 
 ```
 
