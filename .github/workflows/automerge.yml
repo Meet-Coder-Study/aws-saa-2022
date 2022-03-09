@@ -1,7 +1,8 @@
 name: automerge
 on:
   schedule:
-    - cron: '0 13 * * 3'
+    - cron: '0 13 * * 3' # utc 기준 시간
+    # Asia/Seoul 기준 수요일 22시에 실행
 jobs:
   automerge:
     runs-on: ubuntu-latest
