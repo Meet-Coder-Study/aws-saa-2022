@@ -30,4 +30,3 @@ AWS 계정 B의 Amazon S3 버킷에 액세스하는 AWS 계정 A의 Lambda 함�
 - 네트워크 ACL을 사용하여 Amazon EC2 인스턴스로 들어오고 나가는 네트워크 트래픽을 제어
 - IAM 정책 루트 자격 증명을 설정하여 EFS 파일 시스템에 액세스하는 클라이언트를 제어 및 구성
 - https://docs.aws.amazon.com/ko_kr/efs/latest/ug/security-considerations.html
-

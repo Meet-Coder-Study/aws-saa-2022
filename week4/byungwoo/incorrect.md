@@ -1,3 +1,4 @@
+# 오답문제
 ## 2.
 최근 AWS 리소스의 보안을 개선하기 위해 한 금융 서비스 회사는 이니셔티브를 시작했으며 회사가 소유한 여러 AWS 계정에서 AWS Shield Advanced를 활성화했습니다. 분석을 통해 회사는 예상보다 훨씬 높은 비용이 발생했다는 것을 발견했습니다.
 다음 중 AWS Shield Advanced 서비스에 대해 예상치 못한 높은 비용의 근본적인 이유는 무엇일까요?
@@ -7,6 +8,7 @@
 - AWS Shield Advanced는 AWS 클라우드의 일부가 아닌 사용자 지정 서버에 사용되므로 증가한 비용이 발생합니다.
 ```
 AWS 계정이 모두 1회 통합 결제에 속해 있는 동안 월별 요금을 한 번만 지불하면 해당 계정에 속한 모든 AWS 계정과 리소스를 소유할 수 있습니다. 기관이 여러 AWS 계정이 있다면 AWS Management Console이나 API를 사용해 각 계정에서 개별적으로 활성화해 여러 AWS 계정을 AWS Shield Advanced에 구독할 수 있습니다.
+
 ```
 - [AWS Shield FAQ](https://aws.amazon.com/ko/shield/faqs/)
 - [비용 절감 계획](https://aws.amazon.com/ko/savingsplans/faq/)은 AWS Shield Advanced 서비스에 적용되지 않습니다.
@@ -29,6 +31,22 @@ AWS 계정이 모두 1회 통합 결제에 속해 있는 동안 월별 요금을
   - https://aws.amazon.com/ko/directconnect/
 - site-to-site VPN은 온프레미스 네트워크를 VPC로 안전하게 연결할 수 있는 서비스
   - https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/VPC_VPN.html
+```
+
+## 9.
+한 의료 스타트업은 Amazon S3에 저장된 객체에 대한 규정 준수 및 규제 지침을 시행해야 합니다. 주요 요구 사항 중 하나는 적절한 보호를 제공해 실수로 개체를 삭제하지 않도록 하는 것입니다.
+솔루션 아키텍으로서 이러한 지침을 다루기 위해 무엇을 권장하시겠습니까? (2개 선택)
+- (정답) 버킷에서 버전 관리 활성화
+- S3 객체 삭제에 대한 관리자 승인을 받기 위한 프로세스를 수립
+- 사용자가 S3 객체를 삭제하는 동안 추가 확인을 제공해야 하도록 AWS S3 콘솔에서 구성 변경
+- (선택/정답) 버킷에서 MFA 삭제 활성화
+- S3 객체 삭제 시 이벤트 트리거를 생성. 이벤트는 IT 관리자에게 이메일을 통해 SNS 알림을 호출
+```
+a, d를 선택한 줄 알았는데 d만 선택했던 것 같음...
+삭제에 대한 강력한 보호조치는 버전과리와 MFA임
+삭제 승인 프로세스나 사후 알람 발신은 기술적인 해결책이 아님
+https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html
+https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMFADelete.html
 ```
 
 ## 10.
@@ -186,9 +204,9 @@ https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/vpc-nat-gateway.html
 https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_NAT_Instance.html
 ```
 - NAT 게이트웨이
-  ![nat-gateway-diagram](https://docs.aws.amazon.com/vpc/latest/userguide/images/nat-gateway-diagram.png)
+![nat-gateway-diagram](https://docs.aws.amazon.com/vpc/latest/userguide/images/nat-gateway-diagram.png)
 - NAT 인스턴스 vs. NAT 게이트웨이
-  ![nat-gateway-vs-nat-instance](https://assets-pt.media.datacumulus.com/aws-saa-pt/assets/pt4-q12-i1.jpg)
+![nat-gateway-vs-nat-instance](https://assets-pt.media.datacumulus.com/aws-saa-pt/assets/pt4-q12-i1.jpg)
 
 ## 48.
 전자 상거래 회사의 엔지니어링 팀은 EC2 인스턴스의 비용 최적화 작업을 하고 있습니다. 팀은 여러 인스턴스 유형에서 온디맨드 및 스팟 인스턴스를 혼합하여 워크로드를 관리하려고 합니다. 그들은 이러한 인스턴스를 혼합하여 Auto Scaling 그룹을 만들고자 합니다.
@@ -257,6 +275,25 @@ AWS Database Migration Service를 사용하여 데이터를 Amazon Redshift 데�
 - EMR은 맵/리듀스 서비스임
 - Kinesis는 실시간 데이터 스트리밍 서비스임
 - Glue는 고객이 분석을 위해 데이터를 쉽게 준비하고 로드할 수 있는 완전 관리형 ETL(추출, 변환 및 로드) 서비스입니다. AWS Glue 작업은 일괄 ETL 데이터 처리에 사용됩니다. AWS Glue를 사용하려면 데이터베이스 데이터를 Redshift로 복사하는 사용자 지정 마이그레이션 스크립트를 작성하기 위한 상당한 개발 노력이 필요합니다.
+```
+
+## 59.
+회사의 인프라 팀은 리소스 격리를 위해 5개의 서로 다른 VPC(이 VPC를 A, B, C, D, E라고 함)를 유지 관리합니다. 팀은 변경된 조직 구조로 인해 모든 VPC를 함께 연결하려고 합니다. 이를 용이하게 하기 위해 팀은 중앙에 VPC A가 있는 허브 및 스포크 모델의 VPC A와 다른 모든 VPC 간에 VPC 피어링 연결을 설정했습니다. 그러나 여전히 모든 VPC 간의 연결을 설정하는 데 실패했습니다.
+솔루션 아키텍트로서 다음 중 가장 리소스 효율적이고 스케일 가능한 솔루션으로 무엇을 권장하시겠습니까?
+- 인터넷 게이트웨이를 사용하여 VPC 상호 연결
+- (정답) Transit gateway를 사용하여 VPC 상호 연결
+- VPC 엔드포인트를 사용하여 VPC 상호 연결
+- (선택) 모든 VPC 간에 VPC 피어링 연결 답
+```
+Transit gateway라고 생각했는데 VPC 피어링 연결이라고 잘못 선택한 것 같음
+Transit gateway는 VPC와 온프레미스 네트워크를 상호 연결하는 데 사용할 수 있는 네트워크 전송 허브입니다.
+VPC Peering 의 경우 VPC 와 VPC 즉 2개의 VPC 끼리만을 연결하기 때문에 여러 VPC 를 사용하게 되면 그에 따라 VPC Peering 의 개수도 증가하기 때문에 Transit gateway를 사용하는 것이 효율적입니다.
+
+https://docs.aws.amazon.com/ko_kr/vpc/latest/tgw/what-is-transit-gateway.html
+https://docs.aws.amazon.com/ko_kr/vpc/latest/peering/vpc-peering-basics.html
+
+VPC peering vs. Transit gateway
+https://dev.classmethod.jp/articles/different-from-vpc-peering-and-transit-gateway/
 ```
 
 ## 65. (review required)
