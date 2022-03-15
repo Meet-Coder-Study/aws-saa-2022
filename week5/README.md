@@ -1,4 +1,4 @@
-# 4주차 과제 
+# 5주차 과제 
 - [Udemy AWS SAA 강의](https://www.udemy.com/course/best-aws-certified-solutions-architect-associate/)의 `Quiz 2,3,4`를 풀이합니다.
 - EC2와 관련된 Section 5~7 내 퀴즈입니다.
 - 문제를 풀면서 모르는 개념은 강의를 보면서 학습합니다.    
