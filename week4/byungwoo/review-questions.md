@@ -39,10 +39,13 @@ As a Solutions Architect, you would like to bring the time to create a new insta
 - (선택/정답) Aurora 복제본 (Replica) 사용
 - (선택) AWS 글로벌 액셀러레이터
 - AWS Direct Connect 사용
-```
-키워드: 여러 가용 영역에 걸쳐있음, 요청 속도의 주기적인 급증에 대해 보다 탄력적으로 대처
-- Aurora 복제본 (Replica) 사용하여 읽기 작업의 성능을 확보할 수 있음
-- CloudFront는 짧은 지연 시간, 높은 전송 속도로 Points of Presence(POP, 접속 지점) (엣지 로케이션)은 인기 있는 콘텐츠가 시청자에게 빠르게 제공될 수 있도록 함
-오답
-- 글로벌 액셀러레이터는 게임(UDP), IoT(MQTT) 또는 Voice over IP와 같은 비 HTTP 사용 사례와 특히 static IP 주소 또는 결정적으로 빠른 지역 장애 조치가 필요한 HTTP 사용 사례에 적합합니다.
-```
+### 해설
+- 키워드: 여러 가용 영역에 걸쳐있음, 요청 속도의 주기적인 급증에 대해 보다 탄력적으로 대처
+#### 정답
+- Aurora 복제본 (Replica) 사용하여 읽기 작업의 성능을 확보할 수 있습니다.
+- CloudFront는 CDN(콘텐츠 전송 네트워크) 서비스로 개발자 친화적인 환경 내에서 짧은 지연 시간, 높은 전송 속도로 전 세계 고객에게 데이터, 비디오, 애플리케이션 및 API를 안전하고 빠르게 제공합니다. CloudFront Points of Presence, POP(접속 지점) (엣지 로케이션)은 인기 있는 콘텐츠가 시청자에게 빠르게 제공될 수 있도록 합니다. 또한 콘텐츠가 POP에 없을 만큼 인기가 없는 경우에도 시청자에게 더 많은 콘텐츠를 제공하여 해당 콘텐츠의 성능을 개선하는 리전 엣지 캐시가 있습니다.
+- CloudFront는 데이터 복원 요구 사항을 지원하는 오리진 장애 조치 기능을 제공합니다. CloudFront는 글로벌 서비스로 엣지 로케이션 또는 Points of Presence, POP(접속 지점)이라고 하는 전 세계 데이터 센터 네트워크를 통해 콘텐츠를 제공합니다. 엣지 로케이션에 콘텐츠가 아직 캐시되지 않은 경우에 CloudFront는 콘텐츠 최종 버전의 소스로 식별한 오리진에서 콘텐츠를 검색합니다.
+#### 오답
+- AWS 글로벌 액셀러레이터는 로컬 또는 글로벌 사용자와 함께 애플리케이션의 가용성과 성능을 향상시키는 서비스입니다. 애플리케이션 로드 밸런서, 네트워크 로드 밸런서 또는 Amazon EC2 인스턴스와 같은 하나 또는 여러 AWS 리전에서 static IP 주소를 제공해 애플리케이션 엔드포인트에 대한 고정 진입점 역할을 합니다. 글로벌 액셀러레이터는 게임(UDP), IoT(MQTT) 또는 Voice over IP와 같은 비 HTTP 사용 사례와 특히 static IP 주소 또는 결정적으로 빠른 지역 장애 조치가 필요한 HTTP 사용 사례에 적합합니다. CloudFront는 애플리케이션 복원력을 개선해 트래픽 급증 처리에 더 좋기 때문에 이 옵션은 제외됩니다.
+#### 참고
+- [CloudFront vs. Global Accelerator](https://dev.classmethod.jp/articles/summit_korea_rapidly_transfer_content/)
