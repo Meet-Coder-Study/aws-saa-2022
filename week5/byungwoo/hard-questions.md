@@ -10,7 +10,7 @@ EC2 예약 인스턴스의 가능한 예약 기간은?
 - 1년 또는 3년
 - [예약 인스턴스](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-reserved-instances.html#ri-overview)는 사용 비용을 절감해주는 결제 할인 혜택입니다. 예약 인스턴스를 구매할 때 인스턴스 유형, 플랫폼, 테넌시, 리전 또는 가용 영역(선택 사항)과 같은 속성을 설정할 수 있습니다.
 - 1년 또는 3년의 기간 약정을 가지고 있습니다.
-- 예약 인스턴스는 [표준 유형과 Convertible Reserved Instance](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/reserved-instances-types.html)으로 나누어져 있으며 차이는 인스턴스의 변경 가능 여부입니다.
+- 예약 인스턴스는 [표준 유형과 Convertible Reserved Instance 으로 나누어져 있으며](https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/reserved-instances-types.html) 주된 차이는 인스턴스의 변경 가능 여부입니다.
 
 # Quiz3
 ## Question 2:
