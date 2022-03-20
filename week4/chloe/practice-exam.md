@@ -55,14 +55,14 @@
 답: 3
 ```
 - `AWS Global Accelerator`
-  - 글로벌 사용자에게 제공하는 애플리케이션의 가용성과 성능을 향상하는 데 도움이 되는 네트워킹 서비스
-  - 고정 IP 주소를 통해 애플리케이션에 **고정된 진입점**을 제공하고, 서로 다른 AWS 리전 및 가용 영역별로 특정 IP 주소를 관리하는 복잡성을 없앤다
+  - 글로벌 사용자에게 제공하는 애플리케이션의 **가용성**과 **성능**을 향상하는 데 도움이 되는 네트워킹 서비스
+  - 고정 IP 주소를 통해 애플리케이션에 **고정된 진입점**을 제공하고, 서로 다른 AWS **리전** 및 **가용 영역**별로 **특정 IP 주소**를 관리하는 복잡성을 없앤다
   - 애플리케이션 상태, 사용자의 위치 및 고객이 구성하는 정책의 변경에 즉각적으로 대응하여 항상 성능에 기반한 **최적의 엔드포인트로 사용자 트래픽을 라우팅**한다
 - `AWS Global Accelerator로 할 수 있는 것`  
-  - AWS Global Accelerator에서 제공하는 고정 IP 주소와 AWS 엣지 로케이션의 애니캐스트를 리전별 AWS 리소스 또는 엔드포인트(예: Network Load Balancer, Application Load Balancer EC2 인스턴스 및 탄력적 IP 주소)에 연결할 수 있다
-    - IP 주소는 AWS 엣지 로케이션에서 애니캐스트 되므로 사용자와 가까운 AWS 글로벌 네트워크에 온보딩 기능을 제공한다
+  - AWS Global Accelerator에서 제공하는 **고정 IP 주소**와 AWS edge location의 anycast를 리전별 AWS 리소스 또는 엔드포인트(예: Network Load Balancer, Application Load Balancer EC2 인스턴스 및 탄력적 IP 주소)에 연결할 수 있다
+    - IP 주소는 AWS edge location에서 anycast 되므로 사용자와 가까운 AWS 글로벌 네트워크에 온보딩 기능을 제공한다
   - DNS 구성을 업데이트하거나 클라이언트 애플리케이션을 변경하지 않고도 가용 영역 또는 AWS 리전 간에 엔드포인트를 손쉽게 이동할 수 있다
-  - 엔드포인트 그룹에 대한 트래픽 다이얼 비율을 구성하여 특정 AWS 리전에 대한 트래픽 양을 늘리거나 줄일 수 있다
+  - 엔드포인트 그룹에 대한 **트래픽 다이얼 비율**을 구성하여 특정 AWS 리전에 대한 트래픽 양을 늘리거나 줄일 수 있다
     - 성능 및 업데이트를 테스트할 때 유용
   - 엔드포인트 간에 가중치를 할당하여 엔드포인트 그룹 내 각 엔드포인트로 향하는 트래픽 양을 제어할 수 있다
 - [참고: AWS Global Accelerator FAQ](https://aws.amazon.com/ko/global-accelerator/faqs/)
