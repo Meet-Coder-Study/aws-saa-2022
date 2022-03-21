@@ -12,6 +12,14 @@
 ```
 
 - EC2 Hibernate를 적용하려면, EC2 Instance의 Root Volume type은 `EBS volume` 이어야 하고, 암호화 되어 있어야한다
+- `EC2 Hibernate (최대 절전 모드)`
+  - 최대 절전 모드는 인스턴스 메모리 (RAM)의 내용을 Amazon Elastic Block Store(Amazon EBS)의 root volume에 저장한다
+  - Amazon EC2는 인스턴스의 EBS root volume과 연결된 모든 EBS volume을 유지한다
+  - 인스턴스를 시작하면,
+    - EBS root volume이 이전 상태로 복원된다
+    - RAM의 내용이 다시 로드된다
+    - 이전에 해당 인스턴스에서 실행되었던 process가 재개된다
+    - 이전에 연결되었던 data volume들이 다시 attach 되고, 인스턴스는 해당 인스턴스 ID를 유지한다
 
 
 <br>
@@ -26,7 +34,15 @@
 
 - AMI는 특정 region에 종속되며, 각각의 AWS region 마다 고유하다는 특징을 갖는다
 - 다른 region의 AMI를 사용하여 EC2 인스턴스를 런칭할 수 없지만, 다른 region에서 AMI를 복사해서 신규 EC2 인스턴스를 생성할 수 있다  
-
+- `AMI (Amazon Machine Image)`
+  - AMI는 인스턴스를 시작하는데 필요한 정보를 제공한다
+  - 인스턴스를 시작할 때, AMI를 지정해야 한다
+  - 동일한 구성의 인스턴스가 여러개 필요할 때는, 한 AMI에서 여러 인스턴스를 시작할 수 있다
+  - 서로 다른 구성의 인스턴스가 필요할 때는, 다양한 AMI를 사용하여 인스턴스를 시작하면 된다
+  - `AMI의 구성 요소`
+    - 1개 이상의 **EBS snapshot** or 인스턴스 스토어 기반 AMI의 경우 인스턴스 root volume에 대한 template
+    - AMI를 사용하여 인스턴스를 시작 할 수 있는 **권한**
+    - 시작될 때 인스턴스에 연결할 volume을 지정하는 **block device mapping**
 <br>
 
 ### 3) 
