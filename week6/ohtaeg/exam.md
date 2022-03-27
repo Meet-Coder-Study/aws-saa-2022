@@ -67,3 +67,18 @@
 - 동일한 Connection String을 제공하는지는 처음 알았다.
 - 좀 더 찾아보니 Connection String 파라미터는 다음과 같다.
   - [연결 문자열에는 호스트 파라미터로 DB 인스턴스 엔드포인트의 `DNS 주소`와 `포트` 파라미터를 지정한다.](https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/CHAP_GettingStarted.CreatingConnecting.MySQL.html)
+
+
+<br>
+<br>
+
+## Question 1
+![quiz6-question8](./img/quiz6-question8.png)
+
+- RDS 읽기 전용 복제본 차이와 Aurora 글로벌 데이터베이스 차이가 잘 이해가질 않는다.
+- 문제 접근은, 여러 리전이라는 키워드와 복제본이라는 키워드를 통해 읽기 전용 복제본을 떠올렸다.
+  - 그리고 강의에서 RDS 읽기 전용 복제본은 교차 리전을 지원한다고 했다.
+  - [문서](https://docs.aws.amazon.com/ko_kr/AmazonRDS/latest/UserGuide/USER_ReadRepl.XRgn.html)
+- 그래서 1번을 골랐는데 정답은 4번이다.
+- 어떤 포인트에서 답이 왜 Aurora 글로벌 데이터베이스인지가 잘 감이 오질 않습니다 ㅠㅠ
+  - 쉽게 구현한다는 포인트에서 Aurora 글로벌 데이터베이스를 골랐어야 했나 싶기도 합니다.
