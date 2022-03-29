@@ -225,8 +225,8 @@ Amazon Route 53 Registrar에서 mycoolcompany.com을 구매했으며 도메인�
 - healthcheck와 CW metric는 연계 가능
 ```
 - Endpoint를 모니터링하는 상태 확인
-![img_1.png](route53-healthcheck-endpoint.png)
+<br>![img_1.png](route53-healthcheck-endpoint.png)
 - 다른 상태 확인을 모니터링하는 상태 확인 (calculated health checks)
-![img.png](route53-healthcheck-calculated-healthcheck.png)
+<br>![img.png](route53-healthcheck-calculated-healthcheck.png)
 - CloudWatch 경보를 모니터링하는 상태 확인 (Private Hosted Zones/Endpoints)
-![img.png](route53-healthcheck-cloudwatch.png)
+<br>![img.png](route53-healthcheck-cloudwatch.png)
