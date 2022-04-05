@@ -121,8 +121,8 @@ S3 버킷에 업로드된 객체가 있는 경우, 여러분은 어떻게 알림
 
 ## Question 9:
 여러분은 S3 버전 관리가 활성화되고 객체가 많은 S3 버킷의 비용을 줄이기 위해 이전 객체 버전을 제거하고 싶습니다. 이러한 이전 객체 버전의 삭제를 자동화하는 가장 좋은 방법은 무엇일까요?
-- S3 수명 주기 규칙 - 만료 작업
-- (정답) S3 수명 주기 규칙 - 전환 작업
+- (정답) S3 수명 주기 규칙 - 만료 작업
+- S3 수명 주기 규칙 - 전환 작업
 - S3 액세스 로그
 ```markdown
 # S3 수명주기 규칙
@@ -135,7 +135,7 @@ S3 버킷에 업로드된 객체가 있는 경우, 여러분은 어떻게 알림
 - (정답) Instant (10초)
 - Expedited (1~5분)
 - Standard (3~5시간)
-- Bulik (5~12시간)
+- Bulk (5~12시간)
 ```markdown
 - 회수 모드: retrieval mode
 # Amazon Glacier 회수모드 3가지
@@ -168,10 +168,8 @@ S3 버킷에 업로드된 객체가 있는 경우, 여러분은 어떻게 알림
 - S3 버킷을 트래버스할 애플리케이션을 만들고 처음 250바이트에 대해 바이트 범위 가져오기를 실행하고 해당 정보를 RDS에 저장합니다.
 - S3 버킷을 트래버스할 애플리케이션을 만들고 S3 Select를 사용하여 처음 250바이트를 가져온 다음 해당 정보를 RDS에 저장합니다.
 ```markdown
-# S3 Select & Glacier Select
-- 서버 사이드 필터링 SQL으로 적은 데이터 추출
-- rows & columns 필터 가능
-- 네트워크 전송비용 절감, 클라이언트 비용 절감
+S3 바이트 범위 가져오기
+https://docs.aws.amazon.com/whitepapers/latest/s3-optimizing-performance-best-practices/use-byte-range-fetches.html
 ```
 
 ## Question 16:
