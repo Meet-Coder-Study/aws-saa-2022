@@ -24,6 +24,18 @@ N/A
 - 객체를 업로드하면 Amazon S3는 제공된 암호화 키를 사용하여 `AES-256 암호화`를 데이터에 적용하고 메모리에서 암호화 키를 삭제한다
   - 객체를 검색할 경우 요청에 포함된 것과 동일한 암호화 키를 제공해야 한다
 
+
+#### S3 데이터 암호화
+- Server-side encryption
+  - `SSE-S3`
+    - AWS가 암호화 키 모두 관리
+  - `SSE-KMS`
+    - Master key는 client가, Data key는 AWS가 관리
+  - `SSE-C`
+    - Master key와 Data key 모두 client가 관리
+- Client-side encryption
+
+
 <br>
 
 ## Quiz 10. AWS IAM, CLI 및 SDK 퀴즈 (3문제)
