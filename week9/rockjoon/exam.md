@@ -1,3 +1,12 @@
+9주차 키워드
+
+```
+CloudFront OAI  
+Signed URL/cookie  
+Lustre
+AWS snowball
+```
+
 # 1. 
 
 > 여러분은 S3 버킷에서 호스팅되는 정적 웹 사이트가 있습니다. 요청을 더 잘 처리하고 성능을 개선하기 위해 S3 버킷을 가리키는 CloudFront Distribution를 생성했습니다. 잠시 후 사용자가 여전히 S3 버킷에서 직접 웹사이트에 액세스할 수 있음을 알게 되었습니다. 사용자가 CloudFront를 통해서만 웹 사이트에 액세스하도록 하려고 합니다. 어떻게 달성하시겠습니까?
