@@ -104,5 +104,3 @@ ap-northeast-1에서 DynamoDB 테이블을 생성했고 eu-west-1에서 사용�
 - active-active replication -> 어느 리전에서든 테이블 쓰기/읽기가 가능함
 - DynamoDB Stream을 먼저 활서화해야 함
 ```
-
-##
