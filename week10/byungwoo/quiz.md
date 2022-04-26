@@ -2,7 +2,7 @@
 ## Question 3:
 ECS 작업이 S3 버킷에 파일을 업로드하도록 하려는 ECS 클러스터(EC2 launch type)에서 호스팅되는 애플리케이션이 있습니다. ECS 작업에 대해 어떤 IAM 역할을 수정해야 할까요?
 - EC2 인스턴스 프로파일
-- ECS 태스크 역할
+- (정답) ECS 태스크 역할
 ```markdown
 (해설) ECS 작업 역할은 ECS 작업 자체에서 사용하는 IAM 역할입니다. 컨테이너가 S3, SQS 등과 같은 다른 AWS 서비스를 호출하려고 할 때 사용  
 
@@ -49,6 +49,7 @@ Edge-Optimized API Gateway를 사용하는 경우 API Gateway는 모든 AWS 리�
 • Edge-Optimized (기본값): For global clients
   • 가장 가까운 CloudFront에서 요청을 받고 API Gateway로 전달 (latency 향상)
   • 그러나 CloudFront는 전역적이지만 API Gateway는 특정 리전에만 있음
+  • 글로벌로 서비스를 제공하고자 할 때 사용
 • Regional:
   • For clients within the same region
   • Could manually combine with CloudFront (more control over the caching strategies and the distribution)
@@ -102,5 +103,5 @@ ap-northeast-1에서 DynamoDB 테이블을 생성했고 eu-west-1에서 사용�
 - DynamoDB를 여러 리전에서 빠르게(low-latency) 접근할 수 있도록 하는 서비스
 - 양방향 복제 (two-way replication)
 - active-active replication -> 어느 리전에서든 테이블 쓰기/읽기가 가능함
-- DynamoDB Stream을 먼저 활서화해야 함
+- DynamoDB Stream을 먼저 활성화해야 함
 ```
