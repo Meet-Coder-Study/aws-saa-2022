@@ -11,8 +11,8 @@ DevOps팀은 퍼블릭 서브넷과 프라이빗 서브넷이 있는 VPC에서 2
 - (선택/정답) 보안 그룹은 NAT 인스턴스와 연관 될 수 있습니다.
 ```markdown
 # NAT 디바이스 (인스턴스)
-- NAT 디바이스를 사용하여 프라이빗 서브넷의 인스턴스를 인터넷(예: 소프트웨어 업데이트용) 또는 기타 AWS 서비스에 연결하는 한편, 인터넷에서 해당 인스턴스와의 연결을 시작하지 못하도록 할 수 있습니다. NAT 디바이스는 프라이빗 서브넷의 인스턴스에서 인터넷 또는 기타 AWS 서비스로 트래픽을 전달한 다음 인스턴스에 응답을 다시 보냅니다. 트래픽이 인터넷으로 이동하면 소스 IPv4 주소가 NAT 디바이스의 주소로 대체되고, 이와 마찬가지로 응답 트래픽이 해당 인스턴스로 이동하면 NAT 디바이스에서 주소를 해당 인스턴스의 프라이빗 IPv4 주소로 다시 변환합니다.
-- NAT 디바이스는 주소 변환과 포트 주소 변환(PAT)을 모두 담당합니다.
+- NAT 디바이스를 사용하여 프라이빗 서브넷의 인스턴스를 인터넷(예: 소프트웨어 업데이트용) 또는 기타 AWS 서비스에 연결하는 한편, 인터넷에서 해당 인스턴스와의 연결을 못하도록 할 수 있습니다.
+- NAT 디바이스는 주소 변환과 포트 변환을 모두 담당합니다.
 ```
 
 ## 2.
@@ -182,9 +182,9 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 - https://dev.classmethod.jp/articles/different-from-vpc-peering-and-transit-gateway/
 - https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/how_it_works.html#VPNGateway
 ```
-- AWS Transit Gateway
+- AWS Transit Gateway<br>
 ![img.png](https://lh4.googleusercontent.com/4Dyzf69eQbvhcZkmJ7NQJly7gpIaEjfHIjXH5H0x29VAyDDjibGaUkR32Kan4ctP-bRq_Qi3iSCCFauju1SV46yaN1Hxy_7YKcyZ_30C-fmA82dO0XFaINzo4rEMIjkpDHNbP1_3)
-- VPN Gateway
+- VPN Gateway<br>
 ![img.png](https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/images/vpn-how-it-works-vgw.png)
   
 ## 11.
@@ -194,6 +194,14 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 - (선택) VPN의 AWS 측과 온프레미스 측 모두에 Virtual Private Gateway를 생성합니다.
 - VPN의 온프레미스 측에 Virtual Private Gateway를 만들고 VPN의 AWS 측에 고객 게이트웨이를 만듭니다.
 - VPN의 AWS 측과 온프레미스 측 모두에 고객 게이트웨이를 생성합니다.
+```markdown
+- AWS Site-to-Site VPN을 사용하면 Amazon VPC와 고객 원격 온프레미스 네트워크 간의 연결을 생성할 수 있습니다.
+- 아래의 그림과 같이 AWS 네트워크에는 Virtual private gateway를 생서하고 고객 온프레미스 네트워크에는 Customer gateway를 생성합니다.
+
+# 참고
+- https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/how_it_works.html#VPNGateway
+```
+![img.png](https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/images/vpn-how-it-works-vgw.png)
 
 ## 12.
 데이터를 실시간으로 수집, 처리 및 분석하는 분석 애플리케이션은 Kinesis Data Streams를 사용하고 있습니다. 생산자는 소비자가 실시간으로 데이터를 처리하는 동안 지속적으로 데이터를 Kinesis Data Streams로 푸시합니다.
@@ -202,6 +210,12 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - (선택/정답) Amazon Redshift
 - Glacier Select
 - Amazon Athena
+```markdown
+- Amazon Kinesis Data Streams를 사용하여 대규모 데이터 레코드 스트림을 실시간으로 수집하고 처리할 수 있습니다.
+- 처리된 레코드를 대시보드로 보내거나, 알림을 생성하는 데 사용하거나, 요금 및 광고 전략을 동적으로 변경하거나, 다른 여러 AWS 제품에 데이터를 보낼 수 있습니다.
+- 아래의 그림과 같이 S3, DynamoDB, Redshift, EMR, Kinesis FIrehose 등으로 내보낼 수 있습니다.
+```
+![img.png](https://lh4.googleusercontent.com/_riQPUih9MUa0uqqfzX1S80_YaktP8hTj5Uk6XwcKfYt0iWLKgo614_2xw6KviP104W-BeD4Q5ZvstfZhjZFoGZxgMJbFseTH9qYtCNYkh3bA08gHcge-pBFxo90I-1kxWyq5gHa)
 
 ## 13.
 회사는 Amazon S3에 로그 파일을 기록하는 거래 시스템을 사용합니다. 또한 시스템은 거의 실시간으로 이러한 로그 파일을 병렬로 읽으려고 시도합니다. 엔지니어링팀은 거래 시스템이 기존 로그 파일을 덮어쓴 다음 덮어쓴 특정 로그 파일을 읽으려고 할 때 데이터 불일치를 관찰했습니다.
@@ -210,6 +224,11 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - 프로세스는 기존 객체를 대체하고 즉시 읽으려고 합니다. 변경 사항이 완전히 전파될 때까지 Amazon S3가 새 데이터를 반환 할 수 있습니다.
 - (선택) 프로세스는 기존 객체를 대체하고 즉시 읽으려고 합니다. 변경 사항이 완전히 전파될 때까지 Amazon S3는 항상 이전 데이터를 반환합니다.
 - 프로세스는 기존 객체를 대체하고 즉시 읽으려고 합니다. 변경 사항이 완전히 전파될 때까지 Amazon S3는 데이터를 반환하지 않습니다.
+```markdown
+- 키워드: 병렬로 읽으려고 시도
+- Amazon S3에서는 AWS 데이터 센터 내의 여러 서버로 데이터를 복제함으로써 고가용성을 구현합니다. PUT 요청이 성공하면 데이터가 안전하게 저장됩니다.
+- 그러나 변경 사항에 대한 정보를 Amazon S3로 복제해야 하는데 이 작업에는 일정 시간이 걸릴 수 있으며 변경사항이 전파되기 전까지는 불완전한 데이터가 아닌 이전 데이터를 반환합니다.
+```
 
 ## 14.
 데이터 센터의 재해로부터 서비스 중단을 방지하기 위해 동기식 복제 모드를 갖춘 데이터베이스 기술을 구현했습니다. 따라서 데이터베이스는 두 개의 가용 영역에서 두 개의 EC2 인스턴스에 배포됩니다. EC2 인스턴스를 퍼블릭 서브넷에 배포하려면 데이터베이스를 공개적으로 사용할 수 있어야 합니다. 복제 프로토콜은 현재 EC2 퍼블릭 IP 주소를 사용합니다.
@@ -218,6 +237,11 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - 두 EC2 인스턴스간에 Private Link를 생성합니다.
 - (정답) 복제에 EC2 인스턴스 프라이빗 IP 사용합니다.
 - EC2 인스턴스에 탄력적 IP를 할당하고 복제에 사용합니다.
+```markdown
+- 비용은 두 EC2 인스턴스 간의 트래픽이 퍼블릭 인터넷을 통해 전송되므로 높은 비용이 발생한다는 것입니다. 프라이빗 IP 주소를 사용하여 같은 가용 영역 내에서 트래픽이 이동하면 데이터 전송 요금은 발생하지 않습니다. 서로 다른 가용 영역을 사용하는 경우에는 데이터 전송 요금이 발생하나 그 비용을 최소화 할 수 있습니다.
+- Elastic Fabric Adapter(EFA)는 Amazon EC2 인스턴스에 연결하여 고성능 컴퓨팅(HPC) 및 기계 학습 애플리케이션의 속도를 높일 수 있는 네트워크 디바이스입니다. 인스턴스 복제와는 관련이 없습니다.
+- AWS PrivateLink는 Virtual Private Cloud(VPC)와 지원되는 AWS 서비스, 다른 AWS 계정에서 호스팅하는 서비스 및 지원되는 AWS Marketplace 서비스 간에 프라이빗 연결을 설정합니다. 인스턴스 복제와는 관련이 없습니다.
+```
 
 ## 15.
 신생 기업에는 웹 응용 프로그램을 호스팅하는 EC2 인스턴스가 있습니다. 향후 몇 개월 이내에 사용자 수가 증가할 것으로 예상되므로 수요에 대처하려면 AWS 아키텍처에 탄력성과 확장성을 더해야 합니다.
@@ -227,3 +251,7 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - 시작 템플릿(Launch Templates)를 사용하여 배포하고 AWS Glue와 통합되는 두 개의 EC2 인스턴스를 설정합니다.
 - EC2 인스턴스 뒤에 AWS WAF를 설정합니다.
 - (선택) EC2 인스턴스 앞에 S3 캐시를 설정합니다.
+```markdown
+- 가중치 라우팅 정책과 같은 Route53에 정책을 생성하여 트래픽을 2개 이상의 EC2 인스턴스로 균등하게 분산할 수도 있습니다. (Route53 -> EC2 연결도 가능!)
+- 정적 컨텐츠를 서빙한다는 내용은 따로 없었기 때문에 S3 캐시와는 관련이 없음
+```
