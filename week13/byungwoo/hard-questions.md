@@ -81,3 +81,148 @@ S3 버킷과 EBS 스냅샷 모두를 암호화하는 데에 사용한 고객 관
 • Good solution to rotate CMK that are not eligible for automatic rotation (like asymmetric CMK)
 • 1년 이내의 주기로 순환이 필요할 때, 자동 키 순환이 불가한 비대칭 CMK를 사용할 때
 ```
+
+## Question 12:
+암호화 목적으로 사용하는 암호 값이 있고, 시간 경과에 따라 암호의 값을 저장하고 추적하려 합니다. 이 경우, 다음 중 어떤 AWS 서비스를 선택해야 할까요?
+- AWS KMS 버전 관리 기능
+- (정답) SSM 파라미터 스토어
+- Amazon S3
+```markdown
+# SSM 파라미터 스토어
+- SSM 파라미터 스토어는 암호를 저장하는 데에 사용될 수 있으며, 추적 기능이 내장되어 있습니다.
+- 파라미터의 값을 수정할 때마다, SSM 파라미터 스토어가 파라미터의 새 버전을 생성하고 기존의 버전을 보관합니다
+- 값을 포함한 모든 파라미터 버전의 내역을 상세히 볼 수 있습니다
+
+# SSM Parameter Store (Simple Systems Manager Parameter Store)
+• Secure storage for configuration and secrets
+• Optional Encryption using KMS
+• Serverless, scalable, durable, easy SDK
+• Version tracking of configurations / secrets
+• Configuration management using path & IAM
+• Notifications with CloudWatch Events
+• Integration with CloudFormation
+```
+
+## Question 14:
+사용자 대면 웹사이트는 디도스 공격에 취약하며, 여러분은 이러한 공격에 대비해 24/7 지원을 받고자 합니다. AWS는 공격 중 발생한 비용에 대한 배상을 제공하고 있습니다. 이 경우, 다음 중 어떤 AWS 서비스를 선택해야 할까요?
+- AWS WAF
+- AWS Shield Advanced
+- AWS Shield
+- AWS DDoS OpsTeam
+```markdown
+- 24/7 지원은 AWS Shield Advanced를 사용해야 함 
+
+# AWS Shield Standard
+• Free service that is activated for every AWS customer
+• Provides protection from attacks such as SYN/UDP Floods, Reflection attacks and other layer 3 & layer 4 attacks
+
+# AWS Shield Advanced
+• Optional DDoS mitigation service ($3,000 per month per organization)
+• Protect against more sophisticated attack on EC2, ELB, CloudFront, Global Accelerator, Route 53
+• 24/7 access to AWS DDoS response team (DRP)
+• Protect against higher fees due to DDoS
+```
+
+## Question 15:
+애플리케이션이 주요 데이터베이스의 구성 값을 외부적으로 유지하여 그 값을 런타임 시 선택할 수 있도록 하려 합니다. 제어와 버전 내역을 유지하기 위해서는 다음 중 어떤 장소에 구성 값을 저장해야 할까요?
+- DynamoDB
+- S3
+- EBS
+- SSM 파라미터 스토어
+```markdown
+설정 값에 대한 버전 내역을 유지하기 위해서는 SSM 파라미터 스토어를 사용해야 함
+```
+
+## Question 16:
+암호화 키를 관리하고, 이들을 완전히 제어하기 위해 전용 하드웨어 모듈을 사용하려 합니다. 어떤 방법을 추천할 수 있을까요?
+- (정답) CloudHSM
+```
+# CloudHSM (Hardware Security Module)
+• CloudHSM vs. KMS
+  • CloudHSM: AWS provisions encryption hardware
+  • KMS: AWS manages the software for encryption 
+• Dedicated Hardware (HSM = Hardware Security Module)
+• You manage your own encryption keys entirely (not AWS)
+• Must use the CloudHSM Client Software
+• Good option to use with SSE-C encryption (server-side encryption with customer-provided encryption keys => when you want to manage your own encryption keys)
+```
+![img.png](aws-cloud-hsm.png)
+
+## Question 19:
+EC2 인스턴스의 OS 취약점을 분석하려 합니다. 분석은 매주 수행되어야 하며, 취약점 발견 시 구체적인 권장 사항을 제공해야 합니다. 이 경우, 다음 중 어떤 AWS 서비스를 선택해야 할까요?
+- AWS Shield
+- Amazon GuardDuty
+- Amazon Inspector
+- AWS Config
+```markdown
+# Amazon Inspector
+• Automated Security Assessments for EC2 instances
+• Analyze the running OS against known vulnerabilities (with agent)
+• Analyze against unintended network accessibility (agentless)
+• OS 취약점 분석용 
+
+# AWS Config
+• Helps with auditing and recording compliance of your AWS resources
+• Helps record configurations and changes over time
+• Questions that can be solved by AWS Config:
+  • Is there unrestricted SSH access to my security groups?
+  • Do my buckets have any public access?
+  • How has my ALB configuration changed over time?
+• receive alerts (SNS notifications) for any changes
+• 규정준수를 위한 AWS 설정이 변경되는지 감시하는 서비스
+  
+# Amazon GuardDuty
+• Intelligent Threat discovery to Protect AWSAccount
+• Uses Machine Learning algorithms, anomaly detection, 3rd party data
+• One click to enable (30 days trial), no need to install software
+```
+- GuardDuty
+![img.png](aws-guard-duty.png)
+
+## Question 18:
+Application Load Balancer가 관리하는 한 세트의 EC2 인스턴스에 웹사이트가 호스팅되어 있습니다. 일반적인 웹 애플리케이션 공격(예: SQL 주입)으로부터 웹사이트를 보호하기 위해서는 다음 중 어떤 방법을 사용해야 할까요?
+- (정답) AWS WAF
+```markdown
+# AWS WAF – Web Application Firewall
+• Protects your web applications from common web exploits (Layer 7)
+• Deploy on ALB, API Gateway, CloudFront
+• Define Web ACL (Web Access Control List):
+  • Rules can include: IP addresses, HTTP headers, HTTP body, or URI strings
+  • Protects from common attack - SQL injection and Cross-Site Scripting (XSS)
+  • Size constraints, geo-match (block countries)
+  • Rate-based rules (to count occurrences of events) – for DDoS protection
+```
+
+## Question 20:
+다음 중 자동 순환을 지원하며, RDS DB 비밀번호를 저장하는 데에 가장 적합한 AWS 서비스는 무엇인가요?
+- (정답) Secrets Manager
+- SSM Parameter Store
+```markdown
+- 민감정보를 저장한다는 점에서 SSM Paramter Store와 헷갈릴 수 있지만 Secrets Manger는 자동 순환을 지원함
+
+# AWS Secrets Manager
+• Newer service, meant for storing secrets
+• Capability to force rotation of secrets every X days
+• Automate generation of secrets on rotation (uses Lambda)
+• Integration with Amazon RDS (MySQL, PostgreSQL, Aurora) • Secrets are encrypted using KMS
+• Mostly meant for RDS integration
+```
+
+## Question 21:
+AWS 조직 내 AWS 계정 전체의 EC2 보안 그룹과 AWS Shield Advanced를 중앙에서 관리하기 위해서는 다음 AWS 서비스 중 무엇을 사용해야 할까요?
+- (정답) AWS Firewall Manager
+```markdown
+- AWS Firewall Manager는 보안 관리 서비스로 AWS Organizations에 있는 계정과 애플리케이션 간에서 방화벽 규칙을 구성하고 중앙 관리할 수 있게 해줍니다.
+- AWS Organizations에 통합되어 있기 때문에, AWS WAF 규칙, AWS Shield Advanced 보호, 보안 그룹, AWS Network Firewall 규칙, Amazon Route 53 Resolver와 DNS 방화벽 규칙을 활성화할 수 있습니다.
+```
+
+## Question 22:
+다음 중 S3 버킷에 저장된 민감한 데이터를 보호하기 위해서는 어떤 AWS 서비스를 사용해야 할까요?
+- GuardDuty
+- Shield
+- (정답) Macie
+- KMS
+```markdown
+Amazon Macie는 완전 관리형 데이터 보안 서비스로, 머신 러닝을 사용해 S3 버킷 내에 저장된 민감한 데이터를 발견하고 보호합니다. 이는 암호화되지 않은 버킷의 목록, 공용으로 액세스 가능한 버킷 및 다른 AWS 계정과 공유된 버킷을 포함한 S3 버킷의 인벤토리를 자동으로 제공합니다. 이를 사용하면, 개인 식별 정보(PII)와 같이 민감한 데이터를 식별해 경고해 줍니다.
+```
+![img.png](img.png)
