@@ -45,7 +45,8 @@ VPC에 새로운 서브넷을 생성할 때마다, AWS는 5개의 IP 주소를 �
 ```markdown
 # VPC – Subnet (IPv4)
 - AWS reserves 5 IP addresses (first 4 & last 1) in each subnet
-- ex) if CIDR block 10.0.0.0/24, then reserved IP addresses are: • 10.0.0.0 – Network Address
+- ex) if CIDR block 10.0.0.0/24, then reserved IP addresses are:
+  • 10.0.0.0 – Network Address
   • 10.0.0.1 – reser ved by AWS for the VPC router
   • 10.0.0.2 – reserved by AWS for mapping to Amazon-provided DNS
   • 10.0.0.3 – reserved by AWS for future use
@@ -83,6 +84,14 @@ VPC에 새로운 서브넷을 생성할 때마다, AWS는 5개의 IP 주소를 �
 ```
 ![img.png](vpn-cloudhub.png)
 
+## Question 20:
+Direct Connect 연결을 사용해, 공용 및 프라이빗 AWS 리소스 모두에 액세스할 수 있습니다.
+- (정답) 거짓
+```markdown
+# Direct Connect (DX)
+- Access public resources (S3) and private (EC2) on same connection
+```
+
 ## Question 21:
 온프레미스 데이터와 AWS Cloud 간에 구축된 AWS 사이트 대 사이트 VPC 연결 처리량을 단일 IP초 터널의 최대 제한인 1.25Gbps 이상으로 스케일 업하려 합니다. 어떻게 해야 할까요?
 - 2개의 가상 프라이빗 게이트웨이 사용
@@ -119,3 +128,6 @@ You have on-premises sensitive files and documents that you want to regularly sy
 ```
 ![img.png](datasync.png)
 ![img.png](datasync-efs-to-efs.png)
+
+## site to site VPN vs. direct connect
+- https://dev.classmethod.jp/articles/what-is-differnce-aws-dx-ans-vpn-kr/
