@@ -71,18 +71,45 @@ SQS 대기열이 다른 소비 구성 요소가 메시지를 수신하고 처리
 당신은 회사에서 솔루션 아키텍트로 일하고 있습니다. 관리자는 IPv6을 사용하는 ap-northeast-2 리전의 프라이빗 서브넷에 있는 예약 EC2 인스턴스에서 웹서비스를 시작하도록 지시했습니다. 서버에 기밀 데이터에 무단 액세스를 방지하고 규정 준수 요구 사항을 충족하도록 시스템을 보호해야 합니다.
 이 시나리오에서 EC2 인스턴스가 인터넷과 통신 할 수 있지만 인바운드 트래픽은 차단할 수있는 VPC 기능은 무엇입니까?
 - NAT 게이트웨이
-- 인터넷 게이트웨이
+- (선택) 인터넷 게이트웨이
 - NAT 인스턴스
-- 외부 전용 인터넷 게이트웨이
+- (정답) 외부 전용 인터넷 게이트웨이
+```markdown
+- 키워드: IPv6
+
+# 외부 전용 인터넷 게이트웨이 (egress-only-internet-gateway)
+- Used for IPv6 only
+- 수평 확장되고 가용성이 높은 중복 VPC 구성 요소로서, VPC의 인스턴스에서 인터넷으로 IPv6을 통한 아웃바운드 통신을 가능케 하되 인터넷에서 해당 인스턴스와의 IPv6 연결을 시작하지 못하게 할 수 있습니다.
+- https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/egress-only-internet-gateway.html
+
+# NAT 게이트웨이 & NAT 인스턴스
+- NAT 게이트웨이 및 NAT 인스턴스는 IPv4에만 적용되고 IPv6에는 적용되지 않으므로 올바르지 않습니다.
+- 이러한 두 구성 요소는 프라이빗 서브넷의 EC2 인스턴스가 인터넷에 통신하고 인바운드 트래픽을 방지할 수 있지만 IPv6이 아닌 IPv4 주소를 사용하는 인스턴스로만 제한됩니다.
+
+# 인터넷 게이트웨이 (Internet Gateway, IGW)
+- Allows resources (e.g., EC2 instances) in a VPC connect to the Internet
+- 주로 프라이빗 서브넷이 아닌 VPC의 퍼블릭 서브넷에 있는 인스턴스에 대한 인터넷 액세스를 제공하는 데 사용됩니다. 그러나 인터넷 게이트웨이를 사용하면 퍼블릭 인터넷에서 시작된 트래픽도 사용자의 인스턴스에 연결할 수 있습니다. 인바운드 액세스를 차단하라는 시나리오이므로 정답이 아닙니다.
+- https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/VPC_Internet_Gateway.html
+```
 
 ## 6.
 당신은 고객에게 SEO 분석을 자동으로 제공하는 회사의 IT 컨설턴트입니다. 귀사는 AWS에 IPv4 및 IPv6 통신이 허용되는 이중 스택 모드로 작동하는 VPC를 보유하고 있습니다. 들어오는 트래픽을 균등하게 분배하는 Application Load Balancer가 앞에 있는 EC2 인스턴스의 Auto Scaling 그룹에 애플리케이션을 배포했습니다. 라이브로 전환할 준비가 되었지만 도메인 이름이 Application Load Balancer를 가리켜야 합니다.
 Route 53에서 애플리케이션 로드 밸런서의 DNS 이름을 가리키는 데 사용할 레코드 유형은 무엇입니까? (2개 선택)
-- AAAA 타입 별칭 레코드
+- (선택/정답) AAAA 타입 별칭 레코드
 - CNAME 타입 별칭 레코드
 - MX 타입 별칭 레코드
 - A 타입 비별칭 레코드
-- A 타입 별칭 레코드
+- (정답) A 타입 별칭 레코드
+```markdown
+- 키워드: IPv4 및 IPv6 통신이 허용되는 이중 스택 모드
+# Route 53 – RecordTypes
+• A – maps a hostname to IPv4
+• AAAA – maps a hostname to IPv6
+
+# Route 53 – CNAME vs. Alias
+- Alias: Maps a hostname to an AWS resource
+- CNAME: Points a hostname to any other hostname
+```
 
 ## 7.
 금융 회사가 Windows 파일 서버 클러스터를 데이터 센터 밖으로 이동하려고 합니다. 회사는 완전한 Windows 호환성을 제공하는 클라우드 파일 스토리지 제품을 찾고 있습니다.
