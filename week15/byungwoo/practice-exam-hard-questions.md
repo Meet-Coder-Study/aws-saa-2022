@@ -115,26 +115,57 @@ Route 53에서 애플리케이션 로드 밸런서의 DNS 이름을 가리키는
 금융 회사가 Windows 파일 서버 클러스터를 데이터 센터 밖으로 이동하려고 합니다. 회사는 완전한 Windows 호환성을 제공하는 클라우드 파일 스토리지 제품을 찾고 있습니다.
 Windows 시스템과 호환되는 업계 표준 SMB(Server Message Block) 프로토콜을 통해 액세스할 수 있는 매우 안정적인 파일 스토리지를 제공하는 AWS 스토리지 서비스는 무엇입니까? (2개 선택)
 - Amazon S3
-- Elastic File System
-- AWS Storage Gateway의 파일 게이트웨이
-- Amazon FSx for Windows File Server
+- (선택) Elastic File System
+- (정답) AWS Storage Gateway의 파일 게이트웨이
+- (선택/정답) Amazon FSx for Windows File Server
 - Elastic Block Storage
+```markdown
+- 키워드:  데이터 센터 밖으로 이동, Windows 시스템과 호환, SMB(Server Message Block) 프로토콜
+
+# Amazon FSx for Windows (File Server)
+- EFS is a shared POSIX system for Linux 
+- FSx for Windows is a fully managed Windows file system share drive
+
+# AWS Storage Gateway
+- Bridge between on-premises data and cloud data in S3
+- Use cases: disaster recovery, backup & restore, tiered storage
+
+# AWS Storage Gateway - File Gateway
+- Configured S3 buckets are accessible using the NFS and SMB protocol
+- Supports S3 standard, S3 IA, S3 One Zone IA
+```
 
 ## 8.
 회사에서는 프로덕션 환경을 AWS로 마이그레이션하려고 합니다. 관리자가 IAM (Identity Access Management)을 사용하여 AWS 콘솔에 대한 액세스를 설정하도록 요청했습니다. AWS CLI를 사용하여 시스템 관리자를 위한 5명의 사용자를 생성했습니다.
 시스템 관리자가 AWS 콘솔에 액세스하려면 어떤 추가 단계를 수행해야 합니까?
 - 시스템 관리자에게 비밀 액세스 키 및 액세스 키 ID를 제공합니다.
-- 계정에서 다단계 인증 사용 및 비밀번호 정책 정의합니다.
+- (선택) 계정에서 다단계 인증 사용 및 비밀번호 정책 정의합니다.
 - 보안 그룹에 관리자 추가합니다.
-- 작성된 각 사용자의 비밀번호를 제공하고 시스템 관리자에게 이 비밀번호를 제공합니다.
+- (정답) 작성된 각 사용자의 비밀번호를 제공하고 시스템 관리자에게 이 비밀번호를 제공합니다.
+```markdown
+- (해설) 보안에 유의하는 문제가 아니라 단순히 접근방법을 안내하는 개념이므로 비밀번호를 제공하는게 당연함
+- 암호를 사용하여 IAM 사용자를 생성하면 해당 사용자가 AWS Management 콘솔에 로그인할 수 있습니다. 로그인하려면 계정 ID 또는 별칭이 필요합니다. 또한 계정 ID가 포함된 사용자 지정 URL에서 로그인할 수도 있습니다.
+- AWS Management Console은 웹 브라우저를 사용하여 AWS 리소스를 관리하는 데 사용되는 웹 인터페이스입니다. 이에 액세스하려면 사용자에게 웹 콘솔에 로그인할 때 사용할 수 있는 비밀번호가 있어야 합니다.
+```
 
 ## 9.
 회사가 웹사이트를 호스팅하기 위해 Fargate 시작 유형을 사용하는 Amazon ECS 클러스터를 가지고 있습니다. 엄격한 보안 준수를 준수하려면 환경 변수를 사용하여 데이터베이스 자격 증명을 제공해야 합니다. 솔루션 아키텍트로서 정보가 안전하고 클러스터 자체에서 일반 텍스트로 볼 수 없도록 해야 합니다.
 다음 중 최소한의 노력으로 구현할 수 있는 가장 적합한 솔루션은 무엇입니까?
-- AWS Secrets Manager를 사용하여 데이터베이스 자격 증명을 저장한 다음 AWS KMS를 사용하여 이를 암호화합니다. Amazon ECS 작업 실행 역할 (taskRoleArn)에 대한 리소스 기반 정책을 생성하고 KMS와 AWS Secrets Manager에 모두 액세스할 수 있는 작업 정의를 참조합니다. 컨테이너 정의 내에서 컨테이너에 설정할 환경 변수 이름과 민감한 데이터가 포함된 Secrets Manager 시크릿의 전체 ARN을 사용하여 시크릿을 컨테이너에 표시합니다.
-- AWS 시스템 관리자 파라미터 스토어를 사용하여 데이터베이스 자격 증명을 유지한 다음 AWS KMS를 사용하여 이를 암호화합니다. Amazon ECS 작업 실행 역할 (taskRoleArn)에 대한 IAM 역할을 생성하고 이를 작업 정의에서 참조하면 KMS와 파라미터 스토어에 모두 액세스 할 수 있습니다. 컨테이너 정의 내에서 컨테이너에 설정할 환경 변수 이름과 컨테이너에 제공할 민감한 데이터가 포함된 시스템 관리자 파라미터 스토어 매개 변수의 전체 ARN을 사용하여 비밀을 지정합니다.
+- (선택) AWS Secrets Manager를 사용하여 데이터베이스 자격 증명을 저장한 다음 AWS KMS를 사용하여 이를 암호화합니다. Amazon ECS 작업 실행 역할 (taskRoleArn)에 대한 리소스 기반 정책을 생성하고 KMS와 AWS Secrets Manager에 모두 액세스할 수 있는 작업 정의를 참조합니다. 컨테이너 정의 내에서 컨테이너에 설정할 환경 변수 이름과 민감한 데이터가 포함된 Secrets Manager 시크릿의 전체 ARN을 사용하여 시크릿을 컨테이너에 표시합니다.
+- (정답) AWS 시스템 관리자 파라미터 스토어를 사용하여 데이터베이스 자격 증명을 유지한 다음 AWS KMS를 사용하여 이를 암호화합니다. Amazon ECS 작업 실행 역할 (taskRoleArn)에 대한 IAM 역할을 생성하고 이를 작업 정의에서 참조하면 KMS와 파라미터 스토어에 모두 액세스 할 수 있습니다. 컨테이너 정의 내에서 컨테이너에 설정할 환경 변수 이름과 컨테이너에 제공할 민감한 데이터가 포함된 시스템 관리자 파라미터 스토어 매개 변수의 전체 ARN을 사용하여 비밀을 지정합니다.
 - ECS 클러스터의 ECS 작업 정의 파일에서 Docker Secrets를 사용하여 데이터베이스 신임 정보를 저장하여 이러한 민감한 데이터를 중앙에서 관리하고 액세스해야 하는 컨테이너에만 안전하게 전송합니다. 비밀은 운송 중 및 휴지 상태에서 암호화됩니다. 지정된 비밀은 IAM 역할을 통해 명시적으로 액세스 권한이 부여된 서비스 및 해당 서비스 작업이 실행되는 동안에만 액세스 할 수 있습니다.
 - ECS 클러스터의 ECS 작업 정의 파일에 데이터베이스 자격 증명을 저장하고 KMS로 암호화합니다. 작업 정의 JSON 파일을 개인 S3 버킷에 저장하고 버킷에서 HTTPS가 활성화되어 비행 중 데이터를 암호화해야 합니다. 특정 S3 버킷에 액세스할 수 있는 ECS 작업 정의 스크립트에 대한 IAM 역할을 생성한 다음 ECS register-task-definition을 호출 할 때 --cli-input-json 매개 변수를 전달합니다. 데이터베이스 자격 증명이 포함된 S3 버킷의 작업 정의 JSON 파일을 참조합니다.
+```markdown
+# ECS Secrets
+- 민감한 데이터(secrets)는 다음과 같은 방법으로 컨테이너에 노출될 수 있습니다.
+  • 환경 변수로 민감한 데이터를 컨테이너에 삽입하려면 secrets 컨테이너 정의 파라미터를 사용하십시오.
+  • 컨테이너의 로그 구성에서 중요한 정보를 참조하려면 secretOptions 컨테이너 정의 파라미터를 사용하십시오.
+- https://docs.aws.amazon.com/ko_kr/AmazonECS/latest/developerguide/specifying-sensitive-data.html
+
+# SSM Parameter Store
+• Secure storage for configuration and secrets
+• Optional Seamless Encryption using KMS
+```
 
 ## 10.
 애플리케이션은 여러 EBS 볼륨이 연결된 EC2 인스턴스에서 호스팅되며 Amazon RDS를 데이터베이스로 사용합니다. 데이터 보안을 향상시키기 위해 인스턴스에 연결된 모든 EBS 볼륨을 암호화하여 볼륨에 저장된 기밀 데이터를 보호합니다.
@@ -225,122 +256,240 @@ EC2 청구와 관련하여 다음 중 사실은 무엇입니까? (2개 선택)
 ## 14.
 당신은 회사에서 AWS에서 업무시스템을 시스템 중단 없이 새 버전으로 원활하게 업그레이드하는 것이 과제입니다.
 다음 중 내부 업그레이드 전략과 비교하여 Blue/Green 배포를 사용할 경우의 이점이 아닌 옵션은 무엇입니까? (2개 선택)
-- CodeCommit 및 CodeBuild와 함께 Blue/Green 배포를 사용하여 새 버전의 애플리케이션을 자동으로 배포 할 수 있습니다.
-- Blue/Green 배포는 전체 업그레이드보다 비용 효율적입니다. 추가 AWS 리소스가 있는 새로운 환경을 시작할 필요가 없습니다.
+- (정답) CodeCommit 및 CodeBuild와 함께 Blue/Green 배포를 사용하여 새 버전의 애플리케이션을 자동으로 배포 할 수 있습니다.
+- (선택/정답) Blue/Green 배포는 전체 업그레이드보다 비용 효율적입니다. 추가 AWS 리소스가 있는 새로운 환경을 시작할 필요가 없습니다.
 - Green환경 문제 감지 및 트래픽이 다시 Blue 환경으로 이동하는 시간 간격에 영향을 미치기 때문에 운영 또는 다운타임이 최소화됩니다.
 - Blue/Green 배포는 Blue와 Green 애플리케이션 환경 간에 격리 수준을 제공하여 배포 위험을 줄입니다. Blue 환경은 프로덕션 트래픽을 지원하는 현재 애플리케이션 버전을 나타내며 Green 버전이 애플리케이션의 다른 버전 또는 업그레이드 버전을 실행하는 동안 준비됩니다.
-- 배포 프로세스 중에 시스템 장애가 발생할 경우 언제든지 들어오는 트래픽을 현재 작업 환경으로 롤백할 수 있습니다.
+- (선택) 배포 프로세스 중에 시스템 장애가 발생할 경우 언제든지 들어오는 트래픽을 현재 작업 환경으로 롤백할 수 있습니다.
+```markdown
+- CodeCommit 및 CodeBuild와 함께 Blue/Green 배포를 사용하여 새 버전의 애플리케이션을 자동으로 배포 할 수 있습니다. -> in-place 배포로도 새 버전의 어플리케이션으로 자동 배포 가능
+- Blue/Green 배포는 전체 업그레이드보다 비용 효율적입니다. 추가 AWS 리소스가 있는 새로운 환경을 시작할 필요가 없습니다. -> 추가로 AWS 리소스를 사용하기 때문에 전체 업그레이드보다 비용 효율적이지는 않음
+```
 
 ## 15.
 디지털 광고 솔루션 회사는 Amazon RDS에서 Oracle 및 PostgreSQL 서비스를 실행하는 데 상당한 투자를하고 있습니다. 비즈니스 분석 팀은 이러한 데이터베이스에 대한 임시 질의를 실행하여 고위 관리를 위한 일일 보고서를 준비했습니다. 엔지니어링팀은 분석 팀에서 이러한 보고서를 실행할 때마다 데이터베이스 성능이 저하되는 것을 확인했습니다. 이제 엔지니어링팀은 비즈니스 분석 보고를 용이하게 하기 위해 이 데이터를 고가용성으로 복제하고 데이터를 Amazon Redshift로 스트리밍하여 이러한 데이터베이스를 페타바이트 규모의 데이터 웨어하우스로 통합하려고 합니다.
 기본 인프라를 관리할 필요 없이 최소의 개발 시간을 필요로 하는 리소스 효율적인 솔루션으로 권장하고 싶은 것은 다음 중 무엇입니까?
 - AWS Glue를 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
-- AWS Database Migration Service를 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
+- (정답) AWS Database Migration Service를 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
 - AWS EMR을 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
-- Amazon Kinesis Data Streams를 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
+- (선택) Amazon Kinesis Data Streams를 사용하여 데이터베이스의 데이터를 Amazon Redshift로 복제합니다.
+```markdown
+- 키워드: 데이터를 고가용성으로 복제, Amazon Redshift로 스트리밍, 데이터 웨어하우스로 통합
+- AWS Database Migration Service를 사용하면 고가용성으로 데이터를 연속적으로 복제할 수 있으며 Amazon Redshift 및 Amazon S3로 데이터를 스트리밍하여 페타바이트급 규모의 데이터 웨어하우스에 데이터베이스를 통합할 수 있습니다. (Continuous Replication)
+```
 
 ## 16.
 회사는 정기적으로 전 세계 각 대륙의 리전 데이터 센터에서 중앙 집중식 S3 버킷에 기가바이트에서 테라바이트까지의 데이터를 업로드하는 직원과 고객이 있습니다. 연말에 수천 개의 데이터가 ap-northeast-2(서울) 리전에 있는 중앙 S3 버킷에 업로드되고 있으며 업로드 시간이 느려서 많은 직원들이 불만을 제기하기 시작했습니다. 당신은 관리자로로부터 보고서 처리가 지연되지 않도록 가능한 한 빨리 이 문제를 해결하라는 지시를 받았습니다.
 고객과 Amazon S3 버킷 간에 장거리를 통해 파일을 빠르고 쉽고 안전하게 전송할 수 있는 기능은 무엇입니까?
 - 멀티 파트 업로드
 - 교차 리전 복제
-- AWS Global Accelerator
-- Transfer Acceleration
+- (선택) AWS Global Accelerator
+- (정답) Transfer Acceleration
+```markdown
+# S3 Transfer Acceleration
+- Amazon S3 Transfer Acceleration은 거리가 먼 클라이언트와 S3 버킷 간에 파일을 빠르고, 쉽고, 안전하게 전송할 수 있게 해줍니다. 
+- Transfer Acceleration은 전 세계적으로 분산되어 있는 Amazon CloudFront의 엣지 로케이션을 활용합니다.
+- 지 로케이션에 도착한 데이터는 최적화된 네트워크 경로를 통해 Amazon S3로 라우팅됩니다.
+
+# AWS Global Accelerator
+- AWS Global Accelerator는 글로벌 사용자에게 제공하는 애플리케이션의 가용성과 성능을 향상하는 데 도움이 되는 네트워킹 서비스입니다. AWS Global Accelerator는 손쉽게 설정, 구성 및 관리할 수 있습니다.
+- 고정 IP 주소를 통해 애플리케이션에 고정된 진입점을 제공하고, 서로 다른 AWS 리전 및 가용 영역별로 특정 IP 주소를 관리하는 복잡성을 없앱니다.
+- AWS Global Accelerator는 애플리케이션 상태, 사용자의 위치 및 고객이 구성하는 정책의 변경에 즉각적으로 대응하여 항상 성능에 기반한 최적의 엔드포인트로 사용자 트래픽을 라우팅합니다.
+- 속도 비교 도구를 사용하여 사용자의 위치에서 성능 혜택을 테스트할 수 있습니다.
+- 다른 AWS 서비스와 마찬가지로 AWS Global Accelerator는 장기 약정 또는 최소 요금이 필요 없고 사용량에 따라 비용을 지불하는 셀프 서비스입니다.
+
+# (참고) AWS Global Accelerator vs CloudFront
+• They both use the AWS global network and its edge locations around the world
+• Both services integrate with AWS Shield for DDoS protection.
+## CloudFront
+• Improves performance for both cacheable content (such as images and videos)
+• Dynamic content(suchasAPIaccelerationanddynamicsitedelivery)
+• Content is served at the edge
+## Global Accelerator
+• ImprovesperformanceforawiderangeofapplicationsoverTCPorUDP
+• Proxying packets at the edge to applications running in one or more AWS Regions.
+• Good fit for non-HTTP use cases, such as gaming(UDP), IoT(MQTT), or Voice over IP
+• Good for HTTP use cases that require static IP addresses
+• Good for HTTP use cases that required deterministic, fast regional failover
+```
 
 ## 17.
 회사는 사용자가 자체 관리 설문지를 통해 바이러스 증상에 대한 위험 평가 조사를 완료할 수 있도록 새로운 웹 애플리케이션을 만들었습니다. 회사는 Route 53을 사용하여 도메인 virus-survey.com을 구입했습니다. 웹 개발 팀은 virus-survey.com의 모든 트래픽이 www.virus-survey.com으로 라우팅되도록 Route 53 레코드를 생성하려고합니다.
 웹 개발 팀에 추천할 가장 비용 효율적인 솔루션은 다음 중 무엇입니까?
-- 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 별칭 레코드를 작성합니다.
+- (정답) 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 별칭 레코드를 작성합니다.
 - 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 MX 레코드를 작성합니다.
 - 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 NS 레코드를 만듭니다.
-- 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 CNAME 레코드를 작성합니다.
+- (선택) 트래픽을 www.virus-survey.com으로 라우팅하는 virus-survey.com에 대한 CNAME 레코드를 작성합니다.
+```markdown
+- virus-survey.com -> zone apex
+- CNAME 레코드와 달리, zone apex라고도 하는 DNS 네임스페이스의 최상위 노드에 별칭 레코드를 만들 수 있습니다. 예를 들어, DNS 이름 example.com을 등록하면 zone apex는 example.com입니다. example.com에 대한 CNAME 레코드는 만들 수 없지만, www.example.com으로 트래픽을 라우팅하는 example.com에 대한 별칭 레코드를 만들 수 있습니다.
+- 별칭 레코드를 사용하여 AWS 리소스로 트래픽을 라우팅하면 Route 53이 리소스의 변경 내용을 자동으로 인식합니다.
+```
 
 ## 18.
 회사에서는 Amazon S3를 사용하여 복제할 수 없는 문서를 저장하고 있습니다. 분기별 보고의 경우 3개월 후에 파일을 검색해야 하며 돌발 감사가 실시되는 경우 보관 된 데이터를 즉시 제시 해야 합니다.
 비용 효율적인 방법으로 이 요구사항을 충족할 수 있는 S3 스토리지 클래스는 무엇입니까?
-- Amazon S3 Standard - Infrequent Access
-- Amazon S3 -Intelligent Tiering
+- (정답) Amazon S3 Standard - Infrequent Access
+- (선택) Amazon S3 -Intelligent Tiering
 - Amazon S3 glacier
 - Amazon S3 Standard
+```markdown
+S3 Standard - 모든 데이터 유형에 적합한 범용 스토리지로, 대개 자주 액세스하는 데이터에 사용됨
+S3 Intelligent - Tiering - 액세스 패턴을 알 수 없거나 액세스 패턴이 변경되는 데이터에 대해 자동 비용 절감 효과 제공
+S3 Standard - Infrequent Access - 라이브 상태가 된 지 오래되었지만 밀리초 단위 액세스 성능이 요구되는 자주 액세스하지 않는 데이터용
+S3 One Zone - Infrequent Access - 밀리초 단위 액세스 성능이 요구되는 다시 생성 가능한 자주 액세스하지 않는 데이터용
+S3 Glacier - 검색 옵션이 1분부터 12시간까지인 장기적인 백업 및 아카이브용
+S3 Glacier Deep Archive - 일년에 한두 번 액세스하고 12시간 이내에 복원할 수 있는 장기적인 데이터 아카이빙용
+```
 
 ## 19.
 금융 이벤트를 사용자에게 알릴 수 있는 모바일 앱을 구축하고 있습니다. 모바일 앱은 제공자의 SDK 및 Amazon Cognito를 사용하여 자격 증명 제공자 (IdP)로 인증합니다. 최종 사용자가 IdP로 인증 되면 IdP에서 반환된 OAuth 또는 OpenID Connect 토큰이 앱에서 Amazon Cognito로 전달됩니다.
 사용자가 임시 제한된 권한 AWS 자격 증명 세트를 제공하기 위해 다음 중 어떤 것이 반환 됩니까?
 - Cognito API
 - Cognito SDK
-- Cognito 키페어
-- Congito ID
+- (선택) Cognito 키페어
+- (정답) Congito ID
+```markdown
+- IdP = Identity Provider
+# Amazon Cognito
+- Amazon Cognito의 두 가지 주요 구성 요소는 사용자 풀과 자격 증명 풀입니다.
+  - 사용자 풀은 앱 사용자의 가입 및 로그인 옵션을 제공하는 사용자 디렉터리입니다.
+  - 자격 증명 풀을 통해 사용자에게 기타 AWS 서비스에 액세스할 수 있는 권한을 부여할 수 있습니다.
+  - 자격 증명 풀과 사용자 풀을 별도로 또는 함께 사용할 수 있습니다.
+- Amazon Cognito 자격 증명(identity)은 자격 증명(credential)이 아닙니다. AWS Security Token Service(AWS STS)에서 웹 자격 증명 연동 지원을 사용하여 자격 증명으로 교환되는 것입니다. 앱 사용자를 위해 AWS 자격 증명을 얻는 권장 방법은 AWS.CognitoIdentityCredentials를 사용하는 것입니다. 그러면 자격 증명 객체의 ID가 AWS STS를 사용하여 자격 증명용으로 교환됩니다.
+- https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/what-is-amazon-cognito.html
+- https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/getting-credentials.html
+```
+![img.png](https://docs.aws.amazon.com/ko_kr/cognito/latest/developerguide/images/scenario-cup-cib2.png)
+
 
 ## 20.
 회사에는 개발팀이 있으며, AWS 관리형 정책을 계정에 연결하여 빠르게 테스트할 수 있도록 보장하려고 합니다. 그러나 사용자에게 AdministratorAccess 관리 정책을 부여하여 권한 상승은 방지하려고 합니다.
 어떻게 진행해야 할까요?
-- 개발자를 IAM 그룹에 넣은 다음 그룹에 IAM 권한 경계를 정의하여 자신에게 연결할 수 있는 관리형 정책을 제한합니다.
+- (선택) 개발자를 IAM 그룹에 넣은 다음 그룹에 IAM 권한 경계를 정의하여 자신에게 연결할 수 있는 관리형 정책을 제한합니다.
 - 개발자에게 IAM 정책을 연결하면 관리자 액세스 정책이 연결되지 않습니다.
 - AWS 계정에서 개발자가 관리자 액세스 정책을 첨부하지 못하도록 제한하는 서비스 제어 정책 (SCP)을 생성합니다.
-- 각 개발자마다 자신에게 연결할 수 있는 관리형 정책을 제한하는 IAM 권한 경계를 정의합니다.
+- (정답) 각 개발자마다 자신에게 연결할 수 있는 관리형 정책을 제한하는 IAM 권한 경계를 정의합니다.
+```markdown
+# IAM Permission Boundaries
+- IAM Permission Boundaries are supported for users and roles (not groups)
+- 권한경계는 사용자와 역할에만 지원되고 그룹에는 지원되지 않음
+```
 
 ## 21.
 온라인 거래 회사는 Auto Scaling 그룹의 EC2 인스턴스에서 웹 애플리케이션을 실행하고 다운 스트림 처리를 위해 SQS 대기열에서 소비자 주문을 처리하도록 구성되어 있습니다. DevOps팀은 주문이 갑자기 급증하면 애플리케이션의 성능이 저하되는 것을 관찰했습니다.
 다음 중 어떤 솔루션을 사용하여 이 문제를 해결 하시겠습니까?
-- 사용자 지정 Amazon SQS 대기열 지표를 기반으로 단계 조정 정책을 사용합니다.
+- (선택) 사용자 지정 Amazon SQS 대기열 지표를 기반으로 단계 조정 정책을 사용합니다.
 - 사용자 지정 Amazon SQS 대기열 지표를 기반으로 간단한 조정 정책을 사용합니다.
 - 사용자 지정 Amazon SQS 대기열 지표를 기반으로 예약 된 조정 정책을 사용합니다.
-- 사용자 지정 Amazon SQS 대기열 지표를 기반으로 대상 추적 조정 정책을 사용합니다.
+- (정답) 사용자 지정 Amazon SQS 대기열 지표를 기반으로 대상 추적 조정 정책을 사용합니다.
+```markdown
+- 사용자 지정 Amazon SQS 대기열 지표를 기반으로 대상 추적 조정 정책을 사용하는 경우 애플리케이션의 수요 곡선에 맞게 보다 효과적으로 동적 조정을 수행할 수 있습니다.
+- 단계 스케일링을 통해 스케일링 프로세스를 트리거하는 CloudWatch 경보에 대한 스케일링 지표 및 임계 값을 선택할 수 있습니다. 주어진 문제의 경우, 주문 급증을 처리하는 데 필요한 정확한 인스턴스 수를 계산할 수 있는 대상 추적 정책만큼 효율적이지 않습니다. 
+```
+![img.png](sqs-with-asg.png)
 
 ## 22.
 당신은 탄력적 IP (EIP) 주소를 사용하여 공개적으로 액세스 가능한 EC2 인스턴스를 생성하고 해당 EIP를 사용하는 데 드는 비용에 대한 보고서를 제공하도록 지시를 받습니다.
 다음 중 EIP의 가격과 관련하여 올바른 것은 무엇입니까?
 - 인스턴스가 중지되고 연관된 EIP가 하나만 있으면 비용이 없습니다.
-- 인스턴스가 종료되고 연관된 EIP가 하나만 있으면 비용이 없습니다.
-- 인스턴스가 실행 중이고 연관된 EIP가 하나만 있으면 비용이 없습니다.
+- (선택) 인스턴스가 종료되고 연관된 EIP가 하나만 있으면 비용이 없습니다.
+- (정답) 인스턴스가 실행 중이고 연관된 EIP가 하나만 있으면 비용이 없습니다.
 - 인스턴스가 실행 중이고 둘 이상의 연관된 EIP가있는 경우 비용이 없습니다.
+```markdown
+다음 모든 조건에 해당하는 경우에는 탄력적 IP 주소에 대한 비용이 발생하지 않습니다.
+• 탄력적 IP 주소가 EC2 인스턴스에 연결되어 있습니다.
+• 탄력적 IP 주소가 연결된 인스턴스가 실행 중입니다.
+• 인스턴스에 연결된 탄력적인 IP 주소가 하나뿐입니다.
+-> 하나의 실행된 인스턴스 + EIP의 경우에는 비요이 발생하지 않음
+```
 
 ## 23.
 글로벌 재무 데이터를 매 분마다 자주 처리하고 저장하는 거래 플랫폼은 온프레미스 데이터 센터에서 호스팅되며 Oracle 데이터베이스를 사용합니다. 최근 데이터 센터의 냉각 문제로 인해 이 회사는 애플리케이션 성능을 향상시키기 위해 AWS로 인프라를 긴급히 마이그레이션해야 합니다. 솔루션 아키텍트는 데이터베이스를 올바르게 마이그레이션하고 향후 데이터베이스 서버에 장애가 발생할 경우에도 사용 가능한 상태로 유지해야 하는 책임이 있습니다.
 다음 중 요구 사항을 충족하기에 가장 적합한 솔루션은 무엇입니까?
-- AWS Schema Conversion Tool 및 AWS Database Migration Service를 사용하여 데이터베이스 스키마를 변환하여 Oracle 데이터를 Amazon Aurora로 마이그레이션합니다.
-- Multi-AZ 배포를 사용하여 RDS에 Oracle 데이터베이스를 생성합니다.
+- (선택) AWS Schema Conversion Tool 및 AWS Database Migration Service를 사용하여 데이터베이스 스키마를 변환하여 Oracle 데이터를 Amazon Aurora로 마이그레이션합니다.
+- (정답) Multi-AZ 배포를 사용하여 RDS에 Oracle 데이터베이스를 생성합니다.
 - RMAN (Recovery Manager)이 활성화 된 RDS에서 Oracle 데이터베이스 인스턴스를 시작합니다.
 - RDS에서 Oracle RAC(Real Application Cluster)를 시작합니다.
+```markdown
+- 키워드: 향후 데이터베이스 서버에 장애가 발생할 경우에도 사용 가능한 상태로 유지
+- 이 시나리오에서는 기본 데이터베이스 인스턴스가 중단되더라도 고가용성을 보장하기 위해 Multi-AZ를 배포한 RDS의 Oracle 데이터베이스로 사용하는 것이 가장 좋습니다. 따라서 Multi-AZ 배포를 사용하여 RDS에서 Oracle 데이터베이스를 생성하는 것이 정답입니다.
+
+- “AWS Schema Conversion Tool 및 AWS Database Migration Service를 사용하여 데이터베이스 스키마를 변환하여 Oracle 데이터를 Amazon Aurora로 마이그레이션합니다.” -> 이 솔루션은 실현 가능하지만 Oracle 데이터베이스를 Aurora로 마이그레이션하는 데 시간이 걸리므로 허용되지 않습니다
+```
 
 ## 24.
 회사의 관리팀은 직원 급여, 세무 감사 및 규정 준수 준수 여부에 대한 여러 보고서를 생성합니다. EC2 인스턴스의 여러 컴퓨팅 집약적인 워크로드는 매월 마지막 날에 지정된 시간에 실행되며, 관리팀은 이 시간 동안 심각한 성능 저하 추세를 감지했습니다. 엔지니어링팀은 이러한 EC2 인스턴스에 대해 Auto Scaling 그룹을 사용하고 이 사용량이 가장 많은 시간 동안 10개의 EC2 인스턴스를 사용할 수 있도록 함으로써 해결책을 파악했습니다. 정상 작동의 경우 워크로드를 처리하기에 충분한 EC2 인스턴스만 2개입니다.
 다음 중 솔루션을 구현하는 데 권장되는 단계는 무엇입니까?
 - 간단한 추적 정책을 만들고 지정된 시간에 인스턴스 수를 10으로 설정하여 Auto Scaling 그룹을 구성하십시오. 이로 인해 지정된 시간에 최대 트래픽이 시작되기 전에 확장이 발생합니다.
-- 매월 마지막 날 지정된 시간에 시작되는 예약 된 작업을 생성하여 Auto Scaling 그룹을 구성하십시오. 최소 인스턴스 수와 최대 인스턴스 수를 10으로 설정합니다. 이렇게 하면 지정된 시간에 최대 트래픽이 시작되기 전에 스케일 아웃이 발생합니다.
-- 매월 마지막 날 지정된 시간에 시작되는 예약 된 작업을 생성하여 Auto Scaling 그룹을 구성하십시오. 원하는 인스턴스 용량을 10으로 설정합니다. 이로 인해 지정된 시간에 최대 트래픽이 시작되기 전에 스케일 아웃이 발생합니다.
+- (선택) 매월 마지막 날 지정된 시간에 시작되는 예약 된 작업을 생성하여 Auto Scaling 그룹을 구성하십시오. 최소 인스턴스 수와 최대 인스턴스 수를 10으로 설정합니다. 이렇게 하면 지정된 시간에 최대 트래픽이 시작되기 전에 스케일 아웃이 발생합니다.
+- (정답) 매월 마지막 날 지정된 시간에 시작되는 예약 된 작업을 생성하여 Auto Scaling 그룹을 구성하십시오. 원하는 인스턴스 용량을 10으로 설정합니다. 이로 인해 지정된 시간에 최대 트래픽이 시작되기 전에 스케일 아웃이 발생합니다.
 - 대상 추적 정책을 생성하고 지정된 시간에 인스턴스 수를 10으로 설정하여 Auto Scaling 그룹을 구성하십시오. 이로 인해 지정된 시간에 최대 트래픽이 시작되기 전에 확장이 발생합니다.
+```markdown
+- 최소 인스턴스 수와 최대 인스턴스 수를 10으로 설정 -> 다시 2개로 scale-in을 하려면 재설정이 필요
+- 예약된 작업은 최소, 최대 및 원하는 크기를 예약된 작업에서 지정한 시간에 예약된 작업에 의해 지정된 값으로 설정합니다. 이전 값을 추적하여 종료 시간 이후에 이전 값으로 반환하지 않습니다.
+```
 
 ## 25.
 온라인 거래 회사의 한국에 있는 소싱 팀은 신제품 카탈로그의 스프레드시트를 준비하고 있습니다. 스프레드시트는 ap-northeast-2 리전에서 생성된 EFS 파일 시스템에 저장됩니다. 미국 및 유럽 등 다른 AWS 리전의 소싱 팀 팀 관계자들도 이 스프레드시트에서 공동 작업을 하고 싶어 합니다.
 최소의 운영 오버헤드와 이러한 협업을 지원하기 위한 권장 사항은 무엇입니까?
 - 스프레드 시트 데이터는 RDS MySQL 데이터베이스로 이동 한 다음 모든 AWS 리전에서 액세스 할 수 있습니다.
 - EFS는 리전 서비스이므로 다른 AWS 리전에서 액세스 할 수 없으므로 스프레드 시트를 다른 AWS 리전의 EFS 파일 시스템으로 복사해야 합니다.
-- 스프레드 시트는 Amazon S3로 복사 한 다음 모든 AWS 리전에서 액세스 할 수 있습니다.
-- EFS 파일 시스템의 스프레드 시트는 리전 간 VPC 피어링 연결을 사용하여 다른 AWS 리전에서 실행중인 EC2 인스턴스에서 액세스 할 수 있습니다.
+- (선택) 스프레드 시트는 Amazon S3로 복사 한 다음 모든 AWS 리전에서 액세스 할 수 있습니다.
+- (정답) EFS 파일 시스템의 스프레드 시트는 리전 간 VPC 피어링 연결을 사용하여 다른 AWS 리전에서 실행중인 EC2 인스턴스에서 액세스 할 수 있습니다.
+```markdown
+# EFS
+- Amazon EFS는 AZ(가용 영역) 내부와 여러 AZ에 걸쳐 데이터를 저장하여 높은 수준의 가용성과 내구성을 제공하는 리전별 서비스입니다.
+- Amazon EC2 인스턴스는 여러 AZ, 리전 및 VPC에서 파일 시스템에 액세스할 수 있는 반면, 온프레미스 서버는 AWS Direct Connect 또는 AWS VPN을 사용하여 액세스할 수 있습니다.
+
+# 오답
+- “스프레드 시트는 Amazon S3로 복사 한 다음 모든 AWS 리전에서 액세스 할 수 있습니다.”
+- 많은 운영 오버 헤드가 발생하므로 협업의 권장사항은 아닙니다.
+```
 
 ## 26.
 웹 애플리케이션은 Application Load Balancer 앞에 있는 여러 가용 영역에 배포된 EC2 인스턴스의 Auto Scaling 그룹에서 호스팅됩니다. 시스템의 보안을 향상 시키려면 시스템에 SSL 솔루션을 구현해야 하므로 타사 인증 기관 (CA)에서 SSL/TLS 인증서를 요청했습니다.
 애플리케이션의 SSL/TLS 인증서를 안전하게 가져올 수 있는 위치는 어디입니까? (2 개 선택)
-- IAM 인증서 스토어
-- 고객 제공 암호화 키 (SSE-C)를 사용하여 서버 측 암호화로 구성된 S3 버킷
+- (정답) IAM 인증서 스토어
+- (선택) 고객 제공 암호화 키 (SSE-C)를 사용하여 서버 측 암호화로 구성된 S3 버킷
 - 버전 관리가 활성화 된 프라이빗 S3 버킷
-- AWS Certificate Manager
+- (정답/선택) AWS Certificate Manager
 - CloudFront
+```markdown
+# IAM 인증서 스토어
+- 해당 리전에서 ACM을 사용할 수 없으면 다음 AWS CLI 명령을 사용하여 서드 파티 인증서를 IAM 인증서 스토어에 업로드합니다.
+- ACM에서 지원하지 않는 리전에서 HTTPS 연결을 지원해야 하는 경우에만 IAM을 인증서 관리자로 사용합니다. IAM은 프라이빗 키를 안전하게 암호화하고 암호화된 버전을 IAM SSL 인증서 스토리지에 저장합니다.
+- https://docs.aws.amazon.com/ko_kr/IAM/latest/UserGuide/id_credentials_server-certs.html
+```
 
 ## 27.
 당신은 AWS 컨설턴트로 대학에서 일하고 있습니다. 또한 학생 및 직원 기록이 손실되는 엄청난 운영 중단 사태를 겪은 후 미션 크리티컬 애플리케이션에 대한 AWS에서 재해 복구 전략을 수립하고자 합니다. 그들은 이런 일이 다시는 일어나지 않기를 바라지만 동시에 월별 비용을 최소화하기를 원합니다. 그리고 운영 중단이 발생할 경우 항상 사용할 수 있는 최소 버전의 응용 프로그램을 설정하라는 지시를 받습니다. DR 사이트는 AWS에서 시스템의 가장 중요한 핵심 요소만 실행하여 비용을 절감해야 하며, 시스템 중단 시 전체 프로덕션 환경으로 신속하게 업그레이드할 수 있습니다.
 다음 중 이 시나리오에서 가장 비용 효율적인 유형의 재해 복구 아키텍처는 무엇입니까?
-- Warm Standby
+- (선택) Warm Standby
 - 멀티 사이트
 - 백업 및 복원
-- Pilot Light
+- (정답) Pilot Light
+```markdown
+- 키워드: 최소 버전의 응용 프로그램
+# Pilot Ligh vs. Warm Standby
+- A small version of the app vs. Full system is up and running, but at minimum size
+```
 
 ## 28.
 애플리케이션은 다중 AZ 배포 구성에서 EC2 인스턴스의 Auto Scaling 그룹, Application Load Balancer 및 MySQL RDS 인스턴스로 구성됩니다. 고객의 기밀 데이터를 보호하려면 인증 토큰을 통해 EC2 인스턴스와 관련된 프로필 자격 증명을 사용해야만 RDS 데이터베이스에 액세스 할 수 있어야 합니다.
 위의 요구 사항을 충족하기 위해 다음 중 어떤 작업을 수행해야 합니까?
-- IAM DB 인증을 활성화합니다.
-- IAM 역할을 생성하고이를 EC2 인스턴스에 할당하면 RDS 인스턴스에 독점적으로 액세스 할 수 있습니다
+- (정답) IAM DB 인증을 활성화합니다.
+- (선택) IAM 역할을 생성하고이를 EC2 인스턴스에 할당하면 RDS 인스턴스에 독점적으로 액세스 할 수 있습니다
 - RDS에 대한 데이터베이스 연결을 암호화 하도록 애플리케이션에서 SSL 구성합니다.
 - IAM과 STS의 조합을 사용하여 임시 토큰을 통해 RDS 인스턴스에 대한 액세스를 제한합니다.
+```markdown
+# RDS - IAM Authentication
+• IAM database authentication works with MySQL and PostgreSQ
+• You don’t need a password, just an authentication token obtained through IAM & RDS API calls
+• Auth token has a lifetime of 15 minutes
 
+# 오답
+- "IAM 역할을 생성하고이를 EC2 인스턴스에 할당하면 RDS 인스턴스에 독점적으로 액세스 할 수 있습니다"
+- IAM 역할을 생성하고 EC2 인스턴스에 할당할 수 있지만, 여전히 IAM DB 인증을 사용하도록 RDS를 구성해야 합니다.
+```
+![img.png](https://d2908q01vomqb2.cloudfront.net/887309d048beef83ad3eabf2a79a64a389ab1c9f/2022/02/11/image-38.png)
