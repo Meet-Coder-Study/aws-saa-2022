@@ -10,9 +10,12 @@ DevOps팀은 퍼블릭 서브넷과 프라이빗 서브넷이 있는 VPC에서 2
 - NAT 게이트웨이는 접속 서버로 사용할 수 있습니다.
 - (선택/정답) 보안 그룹은 NAT 인스턴스와 연관 될 수 있습니다.
 ```markdown
-# NAT 디바이스 (인스턴스)
 - NAT 디바이스를 사용하여 프라이빗 서브넷의 인스턴스를 인터넷(예: 소프트웨어 업데이트용) 또는 기타 AWS 서비스에 연결하는 한편, 인터넷에서 해당 인스턴스와의 연결을 못하도록 할 수 있습니다.
-- NAT 디바이스는 주소 변환과 포트 변환을 모두 담당합니다.
+- NAT 디바이스는 프라이빗 서브넷의 인스턴스에서 인터넷 또는 기타 AWS 서비스로 트래픽을 전달한 다음 인스턴스에 응답을 다시 보냅니다.
+- 트래픽이 인터넷으로 이동하면 소스 IPv4 주소가 NAT 디바이스의 주소로 대체되고, 이와 마찬가지로 응답 트래픽이 해당 인스턴스로 이동하면 NAT 디바이스에서 주소를 해당 인스턴스의 프라이빗 IPv4 주소로 다시 변환합니다.
+- AWS에서는 두 가지 종류의 NAT 디바이스—NAT 게이트웨이 또는 NAT 인스턴스를 제공합니다. NAT 게이트웨이가 NAT 인스턴스보다 우수한 가용성 및 대역폭을 제공하므로 NAT 게이트웨이를 사용하는 것이 좋습니다.
+- NAT 게이트웨이는 포트 전달을 지원하지 않고 NAT 인스턴스는 포트 전달을 수동으로 사용자 지정하여 구성할 수 있습니다. 
+- https://docs.aws.amazon.com/ko_kr/vpc/latest/userguide/vpc-nat-comparison.html
 ```
 
 ## 2.
@@ -41,10 +44,15 @@ DevOps팀은 퍼블릭 서브넷과 프라이빗 서브넷이 있는 VPC에서 2
 - 검색 옵션이 1분부터 12시간까지인 장기적인 백업 및 아카이브용
 ## S3 Glacier Deep Archive
 - 일년에 한두 번 액세스하고 12시간 이내에 복원할 수 있는 장기적인 데이터 아카이빙용
+
+다음과 같이 전환할 수 없습니다.
+• 임의의 스토리지 클래스에서 S3 Standard 스토리지 클래스로 전환할 수 없습니다.
+• 임의의 스토리지 클래스에서 Reduced Redundancy 스토리지 클래스로 전환할 수 없습니다.
+• S3 Intelligent-Tiering 스토리지 클래스에서 S3 Standard-IA 스토리지 클래스로 전환할 수 없습니다.
+• S3 One Zone-IA 스토리지 클래스에서 S3 Standard-IA 또는 S3 Intelligent-Tiering 스토리지 클래스로 전환할 수 없습니다.
 ```
 ![img.png](https://lh4.googleusercontent.com/gNmh9sIBClNb1OMBBEkwOfzfi5E3Ah_I1CtKPFzvTcBXA6sgvBbeD5trN7IGCQsEOJNuVEFpBjwmNac6BTK0pgnNbWomLNzEcCP3qehSu25_Rwlwvn-M6IkGn4XAwErzpy51lhtW)
 ![img.png](https://lh4.googleusercontent.com/FeZOW98VD4ErnRuxJFrUbs9DiCahasIXfTns_7Rlfa6DJsM_otbCBm-kSAorKbzHYDKG0uEWYGo9ayITDcYJOx226YsSHF_FGAdhOp49UVHXQB7W6OOILc6550kDgZsHltoEB-_b)
-
 
 ## 3.
 웹 애플리케이션에는 항상 최소 6개의 EC2 인스턴스가 실행되어야 합니다. 애플리케이션을 아시아 태평양(서울) 리전의 3개의 가용 영역(ap-northeast-2a, ap-northeast-2b 및 ap-northeast-2c)에 배포해야 합니다. 시스템은 하나의 가용 영역을 손실할 때까지 내결함성을 유지해야 합니다.
@@ -54,8 +62,9 @@ DevOps팀은 퍼블릭 서브넷과 프라이빗 서브넷이 있는 VPC에서 2
 - ap-northeast-2a의 인스턴스 6개, ap-northeast-2b의 인스턴스 6개, ap-northeast-2c의 인스턴스 0개
 - (선택) ap-northeast-2a의 인스턴스 2개, ap-northeast-2b의 인스턴스 2개, ap-northeast-2c의 인스턴스 2개
 ```markdown
-- 키워드:  최소 6개의 인스턴스, 가용 영역을 손실, 내결함성(fault tolerance), 비용 효율적
-- '최소 6개의 인스턴스', '비용 효율적' 키워드를 파악하지 못하고 2-2-2가 아닌 3-3-3 인스턴스를 선택함
+- 키워드: 최소 6개의 인스턴스, 가용 영역을 손실, 내결함성(fault tolerance), 비용 효율적
+- 기본적으로 내결함성은 서비스 저하 없이 일부 구성 요소가 고장 나더라도 시스템이 계속 작동 할 수 있는 능력입니다. AWS에서는 시스템이 소비자를 올바르게 운영하고 서비스하기 위해 항상 실행되어야 하는 최소 실행 EC2 인스턴스 또는 리소스 수를 나타낼 수도 있습니다. 이는 고가용성 개념과는 상당히 다르며, 장애 발생 시 하나 이상의 인스턴스 또는 리소스를 실행하는 것과 관련이 있습니다.
+- 이 시나리오에서는 가용 영역 중 하나에서 정전이 발생하더라도 ap-northeast-2a의 3개 인스턴스, ap-northeast-2b의 3개 인스턴스 및 ap-northeast-2c의 3개 인스턴스가 정답입니다. 시스템은 여전히 최소 6개의 실행중인 인스턴스가 있어야 합니다. 또한 다른 옵션 중에서 가장 비용 효율적인 솔루션입니다.
 ```
 
 ## 4.
@@ -66,15 +75,13 @@ DevOps팀은 퍼블릭 서브넷과 프라이빗 서브넷이 있는 VPC에서 2
 - ASG(Auto Scaling 그룹)에서 관리하는 접속 호스트인 EC2 인스턴스 집합에 대한 VPC 엔드 포인트를 생성합니다.
 - (선택) ASG(Auto Scaling 그룹)에서 관리하는 접속 호스트인 EC2 인스턴스에 연결하는 퍼블릭 Application Load Balancer를 생성합니다.
 ```markdown
-- 키워드: 보안, 접속 호스트
-- 접속 호스트 EC2 인스턴스에 연결 -> SSH 연결이 필요하다고 유추할 수 있는가?
+- 키워드: 안전한 호스트 솔루션(SSH), 고가용성 아키텍처
+- VPC 환경에 접속 호스트(접속 호스트)를 포함하면 환경을 인터넷에 노출시키지 않고 Linux 인스턴스에 안전하게 연결할 수 있습니다. 접속 호스트를 설정한 후 Linux에서 Secure Shell(SSH) 연결을 통해 VPC 내 다른 인스턴스에 액세스할 수 있습니다. 또한 접속 호스트는 미세 조정된 수신 제어를 제공하는 보안 그룹으로 구성됩니다.
+- Network Load Balancer는 개방형 시스템 간 상호 연결(OSI) 모델의 네 번째 계층에서 작동합니다. 초당 수백만 개의 요청을 처리할 수 있습니다. 로드 밸런서가 연결 요청을 받으면 기본 규칙의 대상 그룹에서 대상을 선택합니다. 리스너 구성에 지정된 포트에서 선택한 대상에 대한 TCP 연결을 열려고 시도합니다.
+- 다시 말해서 SSH 연결은 Layer 4에서 동작 
 
-# 공식 해설
-VPC 환경에 접속 호스트(접속 호스트)를 포함하면 환경을 인터넷에 노출시키지 않고 Linux 인스턴스에 안전하게 연결할 수 있습니다. 접속 호스트를 설정한 후 Linux에서 Secure Shell(SSH) 연결을 통해 VPC 내 다른 인스턴스에 액세스할 수 있습니다. 또한 접속 호스트는 미세 조정된 수신 제어를 제공하는 보안 그룹으로 구성됩니다.
-
-Network Load Balancer는 개방형 시스템 간 상호 연결(OSI) 모델의 네 번째 레이어에서 작동합니다.
-
-ALB (Application Load Balancer)는 요청 수준 (계층 7)에서 작동하고 트래픽을 대상 (EC2 인스턴스, 컨테이너, IP 주소 및 Lambda)으로 라우팅합니다. HTTP 및 HTTPS 트래픽의 고급 로드 밸런싱에 이상적인 Application Load Balancer는 마이크로 서비스 및 컨테이너 기반 애플리케이션을 포함한 최신 애플리케이션 아키텍처를 제공하는 고급 요청 라우팅을 제공합니다. ALB는 레이어7 인 HTTP 트래픽만 지원하지만 SSH 프로토콜은 TCP를 기반으로 하며 레이어4입니다. 따라서 Application Load Balancer가 작동하지 않습니다.
+오답
+- ALB (Application Load Balancer)는 요청 수준 (계층 7)에서 작동하고 트래픽을 대상 (EC2 인스턴스, 컨테이너, IP 주소 및 Lambda)으로 라우팅합니다. HTTP 및 HTTPS 트래픽의 고급 로드 밸런싱에 이상적인 Application Load Balancer는 마이크로 서비스 및 컨테이너 기반 애플리케이션을 포함한 최신 애플리케이션 아키텍처를 제공하는 고급 요청 라우팅을 제공합니다. ALB는 레이어7 인 HTTP 트래픽만 지원하지만 SSH 프로토콜은 TCP를 기반으로 하며 레이어4입니다. 따라서 Application Load Balancer가 작동하지 않습니다.
 ```
 
 ## 5.
@@ -86,15 +93,18 @@ ALB (Application Load Balancer)는 요청 수준 (계층 7)에서 작동하고 �
 - (선택) 인스턴스에 퍼블릭 IPv4 주소가 있는 경우 복구 후 퍼블릭 IPv4 주소를 유지하지 않습니다.
 - 인스턴스 복구 중에는 인스턴스를 재부팅 하는 동안 인스턴스가 마이그레이션 되고 메모리에 있는 모든 데이터가 유지됩니다.
 ```markdown
-# 공식 해설
-사용자는 Amazon EC2 인스턴스를 모니터링하고 기본 하드웨어 장애나 복구에 AWS 개입이 필요한 문제로 인해 인스턴스가 손상된 경우 인스턴스를 자동으로 복구하는 Amazon CloudWatch 경보를 만들 수 있습니다. 종료한 인스턴스는 복구할 수 없습니다. 복구된 인스턴스는 인스턴스 ID, 프라이빗 IP 주소, 탄력적 IP 주소 및 모든 인스턴스 메타데이터를 포함하여 원본 인스턴스와 동일합니다. 손상된 인스턴스가 배치 그룹에 있다면, 복구된 인스턴스는 배치 그룹에서 실행됩니다.
+# 해설
+- 사용자는 Amazon EC2 인스턴스를 모니터링하고 기본 하드웨어 장애나 복구에 AWS 개입이 필요한 문제로 인해 인스턴스가 손상된 경우 인스턴스를 자동으로 복구하는 Amazon CloudWatch 경보를 만들 수 있습니다.
+- 종료한 인스턴스는 복구할 수 없습니다.
+- 복구된 인스턴스는 인스턴스 ID, 프라이빗 IP 주소, 탄력적 IP 주소 및 모든 인스턴스 메타데이터를 포함하여 원본 인스턴스와 동일합니다.
+- 손상된 인스턴스가 배치 그룹에 있다면, 복구된 인스턴스는 배치 그룹에서 실행됩니다.
 
 # 인스턴스 복구
 - 인스턴스의 기본 구성을 사용하거나 Amazon CloudWatch 경보를 생성하여 인스턴스를 자동으로 복구할 수 있습니다.
 - 종료한 인스턴스는 복구할 수 없습니다.
 - 복구된 인스턴스는 인스턴스 ID, 프라이빗 IP 주소, 탄력적 IP 주소 및 모든 인스턴스 메타데이터를 포함하여 원본 인스턴스와 동일합니다.
 
-# 참조
+# 참고
 - https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/ec2-instance-recover.html
 - https://docs.aws.amazon.com/ko_kr/AWSEC2/latest/UserGuide/UsingAlarmActions.html#AddingRecoverActions
 ```
@@ -107,7 +117,10 @@ API 엔드 포인트는 어떤 유형의 프로토콜에 노출됩니까?
 - HTTP/2
 - WebSocket
 ```markdown
-- 해설: Amazon API Gateway를 통해 생성된 모든 API는 HTTPS 엔드포인트만 제공합니다.
+- Amazon API Gateway를 통해 생성된 모든 API는 HTTPS 엔드포인트만 제공합니다.
+- Amazon API Gateway는 암호화되지 않은(HTTP) 엔드포인트를 지원하지 않습니다.
+- 기본적으로 Amazon API Gateway는 Amazon API Gateway 인증서를 자동으로 사용하는 API에 내부 도메인을 할당합니다.
+- API가 커스텀 도메인 이름에서 실행되도록 구성할 때, 도메인에 대한 자체 인증서를 제공할 수 있습니다.
 ```
 
 ## 7.
@@ -120,14 +133,28 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 - (선택) 검색할 재무 데이터 아카이브의 범위 또는 일부를 지정합니다.
 ```markdown
 - 키워드: 매월 오래된 데이터를 Glacier로 이동(아카이브), 15분 이내에 필요한 데이터를 검색, 필요할 때 검색 용량을 사용, 최대 150MB/s의 검색 처리량
+- S3 Glacier Select로 간단한 구조화 쿼리 언어(SQL) 문을 S3 Glacier의 데이터에서 직접 사용하여 필터링 작업을 수행할 수 있습니다.
+- S3 Glacier 아카이브 객체에 대해 SQL 쿼리를 제공하면 S3 Glacier Select가 쿼리를 실행하고 출력 결과를 Amazon S3에 작성합니다.
+- S3 Glacier Select를 사용하면 Amazon S3 같이 더 자주 사용하는 계층으로 데이터를 복원할 필요 없이 S3 Glacier에 저장된 데이터에서 쿼리 및 사용자 지정 분석을 실행할 수 있습니다.
+- S3 Select와 S3 Glacier Select는 다름
 
-# S3 Glacier Archive 검색 옵션
-- 표준 검색(Standard): 표준 검색은 보통 3~5시간 이내에 완료됨.
-- 대량 검색(Bulk, 벌크): S3 Glacier에서 가장 저렴한 검색 옵션으로 이를 통해 페타바이트 규모의 데이터도 하루 만에 저렴하게 검색할 수 있습니다. 대량 검색은 보통 5~12시간 이내에 완료됨.
-- 긴급 검색(Expedited, 신속): 긴급 검색을 사용하면 가장 큰 아카이브(250MB 이상)를 제외하고 모든 아카이브에 대해 보통 1~5분 이내에 데이터에 액세스할 수 있음. 긴급 검색에는 온디맨드와 프로비저닝된 요청이라는 2가지 유형이 있습니다. 온디맨드 요청은 AWS가 검색을 1~5분 이내에 완료할 수 있을 때 이행됩니다. 프로비저닝된 요청은 긴급 검색에 대한 검색 용량을 필요할 때 사용할 수 있도록 합니다.
+# S3 Glacier Select
+- 작업을 시작할 때 다음 중 한 가지를 지정하여 액세스 시간과 비용 요건을 기준으로 아카이브를 가져올 수 있습니다.
+• 신속 — 아카이브의 하위 집합에 대한 긴급 요청이 간헐적으로 필요한 경우 신속 가져오기를 통해 빠르게 데이터에 액세스할 수 있습니다. 매우 큰 아카이브(250MB+)를 제외한 모든 경우, 신속 가져오기를 사용하여 액세스된 데이터는 일반적으로 1~5분 안에 사용할 수 있게 됩니다. 프로비저닝된 용량을 통해 필요할 때 신속 검색에 대한 검색 용량이 보장됩니다.
+• 표준 — 표준 가져오기를 사용하면 몇 시간 내에 아카이브에 액세스할 수 있습니다. 표준 검색은 보통 3~5시간 안에 완료됩니다. 검색 요청 시 검색 옵션을 지정하지 않을 경우 기본 옵션이 됩니다.
+• 벌크 — 벌크 가져오기는 S3 Glacier에서 가장 저렴한 가져오기 옵션으로서 심지어 페타바이트 규모의 대용량 데이터까지도 1일 동안 가져올 때 사용할 수 있습니다. 벌크 검색은 보통 5~12시간 안에 완료됩니다.
+
+# 프로비저닝된 용량
+- 프로비저닝된 용량을 통해 필요할 때 신속 검색에 대한 검색 용량이 보장됩니다. 각 용량 단위로 5분마다 신속 검색 3회를 수행할 수 있고, 최대 150MB/s의 검색 처리량이 제공됩니다.
+- 워크로드에 몇 분 내로 데이터의 하위 집합에 대한 매우 안전하고 예측 가능한 액세스가 필요한 경우 프로비저닝된 검색 용량을 구매해야 합니다. 프로비저닝된 검색 용량이 없더라도 비정상적으로 수요가 높지 않은 경우를 제외하면 Expedited 검색은 허용됩니다. 하지만 모든 상황에서 신속 검색에 액세스해야 하는 경우 프로비저닝된 검색 용량을 구매해야 합니다.
+
+# 오답
+"Amazon Glacier Select를 사용하여 데이터를 검색합니다."
+- (Glacier Select가 아니라 S3 Select인 것 같음)
+- 이 옵션은 아카이브 검색 옵션이 아니며 주로 Glacier의 데이터 아카이브에서 직접 SQL문을 사용하여 필터링 작업을 수행하는 데 사용됩니다.
 
 # 참고
-- https://docs.aws.amazon.com/ko_kr/amazonglacier/latest/dev/downloading-an-archive-two-steps.html
+- https://docs.aws.amazon.com/ko_kr/amazonglacier/latest/dev/downloading-an-archive-two-steps.html#api-downloading-an-archive-two-steps-retrieval-options
 - https://arclab.tistory.com/315
 ```
 
@@ -139,7 +166,10 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 - OS 기반 주간 cron 표현식을 통해 트리거 된 데이터베이스 롤오버 작업을 실행하도록 EC2 스팟 인스턴스를 프로비저닝합니다.
 - (정답) 데이터베이스 롤오버 작업을 실행하는 Lambda 함수를 호출하도록 매주 CloudWatch 이벤트 cron 표현식을 예약합니다.
 ```markdown
+- 롤오버: 데이터 롤오벌나 오래되었거나 미사용 데이터를 아카이빙하는 작업
 - AWS Lambda는 분당 최대 한 번의 빈도에 대한 표준 속도 및 cron 표현식을 지원합니다.
+
+오답
 - AWS Glue는 완전히 관리되는 ETL(Extract, Transform and Load) 서비스로, 고객이 분석을 위해 데이터를 쉽게 준비하고 로드할 수 있습니다. AWS Glue 작업은 일괄 ETL 데이터 처리에 사용되며 데이터베이스 롤오버 스크립트를 실행하는 데 적합하지 않습니다.
 - 짧은 작업을 위해서 EC2 인스턴스를 프로비저닝하는 것은 서버리스를 쓰는 것보다 저렴하지 않습니다.
 ```
@@ -154,11 +184,13 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 - AWS ParallelCluster를 사용하여 회사의 모든 계정을 통합합니다.
 ```markdown
 # 해설
-- AWS Organizations는 AWS의 워크로드가 증가하고 확장됨에 따라 환경을 중앙에서 관리하는 데 도움이 됩니다.
-- AWS Resource Access Manager(RAM)는 고객에게 AWS 계정 또는 AWS Organizations 내에서 리소스를 공유할 수 있는 간단한 방법을 제공합니다. 많은 AWS 고객이 여러 AWS 계정을 사용하여 팀에 관리 및 결제 자율성을 제공합니다. 고객은 이제 중앙 집중식으로 리소스를 생성하고 RAM을 사용하여 여러 계정 간에 공유할 수 있으므로 다중 계정 전략의 이점을 유지하면서 고객의 운영 오버헤드를 줄일 수 있습니다
+- AWS Organizations는 AWS의 워크로드가 증가하고 확장됨에 따라 환경을 중앙에서 관리하는 데 도움이 됩니다. 성장하는 스타트업이든, 대기업이든 관계없이 AWS Organizations를 활용하면 결제를 관리하고, 액세스, 규정 준수 및 보안을 제어하고, AWS 계정에서 리소스를 공유하는 일을 모두 중앙에서 손쉽게 처리할 수 있습니다.
+- AWS Resource Access Manager(RAM)는 고객에게 AWS 계정 또는 AWS Organizations 내에서 리소스를 공유할 수 있는 간단한 방법을 제공합니다. 많은 AWS 고객이 여러 AWS 계정을 사용하여 팀에 관리 및 결제 자율성을 제공합니다. 이러한 고객은 이제 중앙 집중식으로 리소스를 생성하고 RAM을 사용하여 여러 계정 간에 공유할 수 있으므로 다중 계정 전략의 이점을 유지하면서 고객의 운영 오버헤드는 줄일 수 있습니다. RAM을 사용하여 리소스를 공유하면 고객이 각 계정에서 중복 리소스를 만들지 않아도 되므로 비용을 절감할 수 있습니다. 공유 리소스의 소비는 AWS Identity and Access Management의 액세스 제어 정책과 AWS Organizations의 서비스 제어 정책에 의해 관리되므로 고객은 보안 및 거버넌스 제어에 대한 기존 투자를 활용할 수 있습니다. 현재 고객은 RAM을 사용하여 Amazon Route 53 확인자 규칙, AWS Transit Gateway, 서브넷 및 AWS License Manager 구성을 공유할 수 있습니다.
 
 # 오답
-- WS Control Tower는 새롭고 안전한 다중 계정 AWS 환경을 설정하고 관리 할 수있는 가장 쉬운 방법을 제공합니다. AWS 계정 또는 조직 내에서 리소스를 공유하는 것과는 관련이 없습니다. 
+- IAM을 사용하여 다른 AWS 계정에있는 리소스에 대한 액세스 권한을 위임 할 수 있습니다.이 프로세스는 매우 번거롭고 회사의 모든 AWS 계정에 대한 계정 간 액세스를 수동으로 설정해야하기 때문에 많은 작업 오버 헤드가 필요합니다. 더 나은 솔루션은 AWS Resources Access Manager를 대신 사용하는 것입니다.
+- AWS Control Tower는 새롭고 안전한 다중 계정 AWS 환경을 설정하고 관리 할 수있는 가장 쉬운 방법을 제공합니다. 이는 AWS 계정 또는 조직 내에서 리소스를 안전하게 공유하는 데 가장 적합한 서비스가 아닙니다. 대신 RAM (AWS Resources Access Manager)을 사용해야합니다. 
+- AWS ParallelCluster는 AWS에서 고성능 컴퓨팅 (HPC) 클러스터를 쉽게 배포하고 관리 할 수 있는 AWS 지원 오픈 소스 클러스터 관리 도구입니다. 이 특정 시나리오에서는 AWS Organizations를 사용하여 모든 AWS 계정을 통합하는 것이 더 적합합니다.
 ```
 
 ## 10.
@@ -173,14 +205,16 @@ S3 버킷에 재무 데이터를 저장하는 온라인 거래 애플리케이�
 
 # AWS Transit Gateway
 - AWS Transit Gateway는 중앙 허브를 통해 VPC와 온프레미스 네트워크를 연결합니다. 복잡한 피어링 관계를 제거하여 네트워크를 간소화합니다. 클라우드 라우터 역할을 하므로 새로운 연결을 한 번만 추가하면 됩니다.
+- AWS Transit Gateway 미사용 시 확장할 때마다 복잡성이 증가합니다. 각 VPC 안에 라우팅 테이블을 유지해야 하고 개별 네트워크 게이트웨이를 사용하여 각 온사이트 위치에 연결해야 합니다.
 
 # AWS Site-to-Site VPN & VPN Gateway
 - Site-to-Site VPN 연결은 AWS 측의 가상 프라이빗 게이트웨이 또는 Transit Gateway와 원격(온프레미스) 측의 고객 게이트웨이(VPN 디바이스를 나타냄) 사이에 두 개의 VPN 터널을 제공
 - 가상 프라이빗 게이트웨이(VPN Gateway)는 Site-to-Site VPN 연결의 Amazon 측에 있는 VPN 집선기(connection)입니다. 가상 프라이빗 게이트웨이를 생성하여 Site-to-Site VPN 연결을 생성할 VPC에 연결합니다.
+- 고객 게이트웨이는 온프레미스 네트워크의 고객 게이트웨이 디바이스를 나타내는 AWS에서 생성하는 리소스입니다. 
 
 # 참고
 - https://dev.classmethod.jp/articles/different-from-vpc-peering-and-transit-gateway/
-- https://docs.aws.amazon.com/ko_kr/vpn/latest/s2svpn/how_it_works.html#VPNGateway
+- https://aws.amazon.com/ko/transit-gateway/
 ```
 - AWS Transit Gateway<br>
 ![img.png](https://lh4.googleusercontent.com/4Dyzf69eQbvhcZkmJ7NQJly7gpIaEjfHIjXH5H0x29VAyDDjibGaUkR32Kan4ctP-bRq_Qi3iSCCFauju1SV46yaN1Hxy_7YKcyZ_30C-fmA82dO0XFaINzo4rEMIjkpDHNbP1_3)
@@ -213,7 +247,7 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 ```markdown
 - Amazon Kinesis Data Streams를 사용하여 대규모 데이터 레코드 스트림을 실시간으로 수집하고 처리할 수 있습니다.
 - 처리된 레코드를 대시보드로 보내거나, 알림을 생성하는 데 사용하거나, 요금 및 광고 전략을 동적으로 변경하거나, 다른 여러 AWS 제품에 데이터를 보낼 수 있습니다.
-- 아래의 그림과 같이 S3, DynamoDB, Redshift, EMR, Kinesis FIrehose 등으로 내보낼 수 있습니다.
+- 아래의 그림과 같이 S3, DynamoDB, Redshift, EMR, Kinesis Firehose 등으로 내보낼 수 있습니다.
 ```
 ![img.png](https://lh4.googleusercontent.com/_riQPUih9MUa0uqqfzX1S80_YaktP8hTj5Uk6XwcKfYt0iWLKgo614_2xw6KviP104W-BeD4Q5ZvstfZhjZFoGZxgMJbFseTH9qYtCNYkh3bA08gHcge-pBFxo90I-1kxWyq5gHa)
 
@@ -226,8 +260,14 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - 프로세스는 기존 객체를 대체하고 즉시 읽으려고 합니다. 변경 사항이 완전히 전파될 때까지 Amazon S3는 데이터를 반환하지 않습니다.
 ```markdown
 - 키워드: 병렬로 읽으려고 시도
-- Amazon S3에서는 AWS 데이터 센터 내의 여러 서버로 데이터를 복제함으로써 고가용성을 구현합니다. PUT 요청이 성공하면 데이터가 안전하게 저장됩니다.
-- 그러나 변경 사항에 대한 정보를 Amazon S3로 복제해야 하는데 이 작업에는 일정 시간이 걸릴 수 있으며 변경사항이 전파되기 전까지는 불완전한 데이터가 아닌 이전 데이터를 반환합니다.
+- Amazon S3은 모든 리전의 S3 버킷에 있는 새 객체의 PUT에 대해 한 가지 주의 사항을 제시함으로써 읽기 후 쓰기 일관성을 제공합니다. 주의할 점은 객체를 생성하기 전에 키 이름에 대한 HEAD 또는 GET 요청을 하고 그 후에 바로 객체를 생성하는 경우, 최종 일관성으로 인해 후속 GET 작업에서 객체가 반환되지 않을 수 있다는 것입니다
+- 단일 키에 대한 업데이트는 원자성입니다. 예를 들어 기존 키에 대해 PUT할 경우 이후의 읽기가 기존 데이터 또는 업데이트된 데이터를 반환할 수 있지만 절대로 손상된 데이터 또는 부분 데이터를 반환하지 않습니다.
+- Amazon S3에서는 AWS 데이터 센터 내의 여러 서버로 데이터를 복제함으로써 고가용성을 구현합니다. PUT 요청이 성공하면 데이터가 안전하게 저장됩니다. 그러나 변경 사항에 대한 정보를 Amazon S3로 복제해야 하는데 이 작업에는 일정 시간이 걸릴 수 있으므로 다음 동작을 관찰할 수 있습니다.
+  • 프로세스가 Amazon S3로 새 객체를 쓰고 해당 버킷 내에 바로 키를 나열합니다. 변경 사항이 완전히 전파될 때까지 객체가 목록에 나타나지 않을 수 있습니다.
+  • 프로세스가 기존 객체를 대체하고 바로 읽기를 시도합니다. 변경 사항이 완전히 전파될 때까지 Amazon S3에서 이전 데이터를 반환할 수 있습니다.
+  • 프로세스가 기존 객체를 삭제하고 바로 읽기를 시도합니다. 삭제가 완전히 전파될 때까지 Amazon S3에서 삭제된 데이터를 반환할 수 있습니다.
+  • 프로세스가 기존 객체를 삭제하고 해당 버킷 내에 바로 키를 나열합니다. 삭제가 완전히 전파될 때까지 Amazon S3에서 삭제된 객체를 나열할 수 있습니다.
+- Amazon S3는 현재 동시 업데이트에 대한 객체 잠금을 지원하지 않습니다. 두 PUT 요청을 동시에 같은 키에 대해 실행할 경우 타임스탬프가 최신인 요청이 우선 적용됩니다. 이것이 문제가 되는 경우 객체 잠금 메커니즘을 애플리케이션에 구축해 넣어야 합니다.
 ```
 
 ## 14.
@@ -239,8 +279,10 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 - EC2 인스턴스에 탄력적 IP를 할당하고 복제에 사용합니다.
 ```markdown
 - 비용은 두 EC2 인스턴스 간의 트래픽이 퍼블릭 인터넷을 통해 전송되므로 높은 비용이 발생한다는 것입니다. 프라이빗 IP 주소를 사용하여 같은 가용 영역 내에서 트래픽이 이동하면 데이터 전송 요금은 발생하지 않습니다. 서로 다른 가용 영역을 사용하는 경우에는 데이터 전송 요금이 발생하나 그 비용을 최소화 할 수 있습니다.
-- Elastic Fabric Adapter(EFA)는 Amazon EC2 인스턴스에 연결하여 고성능 컴퓨팅(HPC) 및 기계 학습 애플리케이션의 속도를 높일 수 있는 네트워크 디바이스입니다. 인스턴스 복제와는 관련이 없습니다.
-- AWS PrivateLink는 Virtual Private Cloud(VPC)와 지원되는 AWS 서비스, 다른 AWS 계정에서 호스팅하는 서비스 및 지원되는 AWS Marketplace 서비스 간에 프라이빗 연결을 설정합니다. 인스턴스 복제와는 관련이 없습니다.
+
+# 오답
+- EFA(Elastic Fabric Adapter)는 Amazon EC2 인스턴스를 위한 네트워크 인터페이스로, 고객이 전산 유체 역학, 기후 모델링, 저수지 시뮬레이션과 같이 높은 수준의 인스턴스 간 통신이 필요한 HPC 애플리케이션을 AWS에서 대규모로 실행할 수 있도록 지원합니다. EFA는 사용자 지정 운영 체제 바이패스 기술을 사용하여 인스턴스 간 통신 성능을 강화합니다. 이는 HPC 애플리케이션을 확장하는 데 매우 중요합니다. EFA를 사용하면 MPI(메시지 전달 인터페이스) 같은 주요 HPC 기술을 사용하는 HPC 애플리케이션을 수천 개의 CPU 코어로 확장할 수 있습니다.
+- AWS PrivateLink(VPC Endpoint)는 Virtual Private Cloud(VPC)와 지원되는 AWS 서비스, 다른 AWS 계정에서 호스팅하는 서비스 및 지원되는 AWS Marketplace 서비스 간에 프라이빗 연결을 설정합니다. 인스턴스 복제와는 관련이 없습니다.
 ```
 
 ## 15.
@@ -254,4 +296,9 @@ Amazon Kinesis에서 소비자는 결과를 어디에 저장할 수 있습니까
 ```markdown
 - 가중치 라우팅 정책과 같은 Route53에 정책을 생성하여 트래픽을 2개 이상의 EC2 인스턴스로 균등하게 분산할 수도 있습니다. (Route53 -> EC2 연결도 가능!)
 - 정적 컨텐츠를 서빙한다는 내용은 따로 없었기 때문에 S3 캐시와는 관련이 없음
+
+# 오답
+- S3 캐시는 EC2 인스턴스에 탄력성과 확장성을 제공하지 않습니다.
+- AWS WAF는 일반적인 웹 공격으로부터 웹 응용 프로그램을 보호하는 웹 응용 프로그램 방화벽입니다. 이 서비스는 애플리케이션에 보안을 제공하는 데 더 중점을 둡니다.
+- AWS Glue는 완전히 관리되는 ETL(Extract, Transform and Load) 서비스로, 고객이 분석을 위해 데이터를 쉽게 준비하고 로드할 수 있습니다. 이 기능은 사용자의 인스턴스에 확장성이나 탄력성을 제공하지 않습니다.
 ```
