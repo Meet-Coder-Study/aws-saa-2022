@@ -73,6 +73,7 @@ D) 큐의 수신 메시지 대기 시간을 늘립니다.
 ```
 선택 A, 정답 D
 단순히 메시지 보존기간(시간)을 늘리면 된다고 생각했는데 출제의도는 Long Polling을 하도록 설정하는 방법에 대해서 질문하는 것 같다.
+Long Polling을 적용하려면 WaitTimeSeconds를 늘려야 한다.
 http://pyrasis.com/book/TheArtOfAmazonWebServices/Chapter28
 ```
 
